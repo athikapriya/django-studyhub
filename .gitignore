@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+
+# Virtual environment
+venv/
+env/
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Environment variables
+.env
+*.env
+
+# Django
+staticfiles/
+media/
+logs/
+*.log
+
+# Ignore Django secret settings
+studyhub/settings.py
+
+# OS files
+.DS_Store
+Thumbs.db
