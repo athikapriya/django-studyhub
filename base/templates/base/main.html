@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en-Us">
+<head>
+    <!-- meta tag -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+    <meta name="keywords" content="html, css, js, bootstrap, python, django, dbsqlite3">
+    <meta name="author" content="Athika Chowdhury Priya">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- title tag -->
+    <title>Studyhub</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.webp' %}">
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+    <!-- bootstrap css cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
+    <!-- global css -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+
+    <!-- individual page css -->
+    {% block css %} {% endblock %}
+</head>
+<body>
+
+    
+    <!-- main section starts here -->
+    <main>
+        {% block content %}
+        {% endblock %}  
+    </main>
+    <!-- main section ends here -->
+
+
+    <!-- bootstrap js cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- global script -->
+    <script src="{% static 'scripts/main.js' %}"></script>
+
+    <!-- individual page js -->
+    {% block script %} {% endblock %}
+</body>
+</html>
