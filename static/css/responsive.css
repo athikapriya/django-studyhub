@@ -13,25 +13,44 @@
 
 /* large screen */
 @media screen and (max-width: 992px) {
-    
+    .navbar-search-form {
+        width: 250px;
+        margin-left: 30px !important;
+    }
 }
 
 
 
 /* medium screen */
 @media (max-width: 768px) {
-    
+
+    h1{
+        display: none;
+    }
+
+    .navbar-brand{
+        height: 40px;
+    }
+
+    nav .form-control input {
+        padding: 3px;
+    }
 }
 
 
 
 /* small screen */
 @media screen and (max-width: 576px) {
-    
+
+    nav .navbar-search-form{
+        display: none !important;
+    }
+
 }
 
 
 /* smaller screen */
 @media screen and (max-width: 400px) {
+
     
 }

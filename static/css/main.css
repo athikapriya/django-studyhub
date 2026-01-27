@@ -13,11 +13,69 @@ html{
     scroll-behavior: smooth;
 }
 
+body{
+    font-family: "DM Sans", sans-serif;
+}
+
 :root{
     --primary-color: #56A5AB;
     --secondary-color : #fff;
     --tertiary-color :#000;
+
+    --background-color: #3F4156;
 }
 
 
 /* reset code and common code ends here */
+
+
+/* nav starts */
+nav{
+    background-color: var(--background-color);
+    background-color: #3F4156;
+}
+
+.navbar-brand{
+    height: 45px;
+}
+
+.navbar-brand img{
+    height: 100%;
+}
+
+nav h1{
+    vertical-align: middle; 
+    letter-spacing: 0.002rem;
+}
+
+nav .form-control{
+    background-color: #51546E;
+    border: none;
+}
+
+nav .form-control input {
+    border: none;
+    padding: 5px;
+    background-color: #51546E;
+    caret-color: var(--secondary-color);
+    color: var(--secondary-color);
+    flex: 1;
+    min-width: 0;
+}
+
+nav .navbar-search::placeholder, nav svg{
+    color: #c0c0c0;
+    opacity: 1;
+}
+
+nav .navbar-search-form{
+    margin-left: 70px;
+    width: 320px;
+}
+
+nav .login-btn{
+    color: #c0c0c0;
+    vertical-align: middle;
+}
+
+/* nav ends */
