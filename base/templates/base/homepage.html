@@ -2,4 +2,18 @@
 
 {% block content %}
 <h1>Homepage</h1>
+
+
+{% for room in rooms %}
+    <div class="text-white">
+        <h5>@{{room.host.username}}</h5>
+        <h5>{{room.id}}. 
+            <a href="{% url 'room' room.slug %}">
+                {{room.name}}
+            </a>
+        </h5>
+        <p>{{room.topic.name}}</p>
+        <hr>
+    </div>
+{% endfor %}
 {% endblock %}
