@@ -1,6 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-# Create your views here.
+from .models import *
+
+
+
+# homepage view
 def homepage(request):
-    context = {}
+    rooms = Room.objects.all()
+    context = {
+        "rooms" : rooms
+    }
     return render(request, 'base/homepage.html', context)
+
+
+# room view
+def room(request, slug):
+    rooms = get_object_or_404(Room, slug=slug)
+    context = {
+        "rooms": rooms
+    }
+    return render(request, 'base/room.html', context)
