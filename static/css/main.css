@@ -19,20 +19,71 @@ body{
 }
 
 :root{
-    --primary-color: #56A5AB;
-    --secondary-color : #fff;
-    --tertiary-color :#000;
+    /* Brand & accents */
+    --color-primary: #57BBDD; 
 
-    --background-color: #3F4156;
+    /* Text */
+    --color-text-primary: #ffffff;  
+    --color-text-secondary: #8B8FA6; 
+
+    /* Surfaces & backgrounds */
+    --color-bg-main: #3F4156; 
+    --color-bg-surface: #51546E;
+
+    /* UI details */
+    --color-btn-primary: #0F172A; 
+
+    /* border radius */
+    --border-radius: 5px;
 }
 
+.color-primary{
+    color: var(--color-primary);
+}
 
+.color-text-primary{
+    color: var(--color-text-primary);
+}
+
+.color-text-secondary{
+    color: var(--color-text-secondary);
+}
+
+.color-bg-main{
+    background-color: var(--color-bg-main);
+}
+
+.color-bg-surface{
+    background-color: var(--color-bg-surface);
+}
+
+h2{
+    font-size: 0.95rem;
+    line-height: 1.5rem;
+}
+
+.card{
+    border: none;
+    border-radius: 6px;
+}
+
+.card-header{
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.card-body{
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
 /* ========== reset code and common code ends here ========== */
 
 
 /* ========== nav starts ========== */
 nav{
-    background-color: var(--background-color);
+    background-color: var(--color-bg-main);
     background-color: #3F4156;
 }
 
@@ -50,16 +101,16 @@ nav h1{
 }
 
 nav .form-control{
-    background-color: #51546E;
+    background-color: var(--color-bg-surface);
     border: none;
 }
 
 nav .form-control input {
     border: none;
     padding: 5px;
-    background-color: #51546E;
-    caret-color: var(--secondary-color);
-    color: var(--secondary-color);
+    background-color: var(--color-bg-surface);
+    caret-color: var(--color-text-primary);
+    color: var(--color-text-primary);
     flex: 1;
     min-width: 0;
 }
@@ -118,7 +169,7 @@ h1{
 }
 
 .dark-toggle input:checked + label {
-    background: var(--primary-color);
+    background: var(--color-primary);
 }
 
 .dark-toggle input:checked + label::after {
