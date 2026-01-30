@@ -127,7 +127,7 @@ h1{
 }
 
 [data-theme="dark"] {
-  background-color: #2D2D39 !important;
+  background-color: #24242d !important;
   color: #eee;
 }
 
@@ -136,7 +136,7 @@ h1{
 }
 
 [data-theme="dark"] .bg-white {
-  background-color: #000 !important;
+  background-color: #24242d !important;
 }
 
 [data-theme="dark"] .bg-black {
