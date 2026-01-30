@@ -7,8 +7,10 @@ from .models import *
 # =============== homepage view =============== 
 def homepage(request):
     rooms = Room.objects.all()
+    room_count = rooms.count()
     context = {
-        "rooms" : rooms
+        "rooms" : rooms,
+        "room_count" : room_count
     }
     return render(request, 'base/homepage.html', context)
 
