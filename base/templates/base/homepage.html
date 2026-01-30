@@ -1,19 +1,29 @@
 {% extends 'base/main.html' %}
 
 {% block content %}
-<h1>Homepage</h1>
 
+<main class="container">
+    <div class="row">
 
-{% for room in rooms %}
-    <div class="text-white">
-        <h5>@{{room.host.username}}</h5>
-        <h5>{{room.id}}. 
-            <a href="{% url 'room' room.slug %}">
-                {{room.name}}
-            </a>
-        </h5>
-        <p>{{room.topic.name}}</p>
-        <hr>
+        <!-- ========== homepage topic components starts here ========== -->
+        <div class="col-lg-3 g-4">
+            {% include 'base/topic_components.html' %}
+        </div>
+        <!-- ========== homepage topic components starts here ========== -->
+
+        <!-- ========== feed components starts here ========== -->
+        <div class="col-lg-6 g-4">
+            {% include 'base/feed_components.html' %}
+        </div>
+        <!-- ========== feed_components ends here ========== -->
+
+        <!-- ========== activity starts here ========== -->
+        <div class="col-lg-3 g-4">
+            {% include 'base/activity_components.html' %}
+        </div>
+        <!-- ========== activity ends here ========== -->
+
     </div>
-{% endfor %}
+</main>
+
 {% endblock %}
