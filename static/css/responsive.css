@@ -1,17 +1,25 @@
-/* xxl screen */
+
+/* =============== xxl screen =============== */
 @media screen and (max-width: 1400px) {
     
 }
 
 
-/* xl screen */
+/* =============== xl screen =============== */
 @media screen and (max-width: 1200px ) {
     
 }
 
 
 
-/* large screen */
+/* =============== xl screen =============== */
+@media screen and (max-width: 1200px) {
+    
+}
+
+
+
+/* =============== large screen =============== */
 @media screen and (max-width: 992px) {
     .navbar-search-form {
         width: 250px;
@@ -25,7 +33,8 @@
 
 
 
-/* medium screen */
+
+/* =============== medium screen  =============== */ 
 @media (max-width: 768px) {
 
     h1{
@@ -43,11 +52,30 @@
     .navbar-search-form {
         width: 230px !important;
     }
+
+    .dark-toggle label {
+        width: 2rem;
+        height: 1.01rem;
+    }
+
+    .dark-toggle label::after {
+        width: 0.75rem;
+        height: 0.75rem;
+        top: 0.129rem;
+        left: 3px;
+    }
+
+    .dark-toggle input:checked + label::after {
+        top: 0.12965rem;
+        left: 1.05rem;
+    }
+
 }
 
 
 
-/* small screen */
+
+/* =============== small screen =============== */
 @media screen and (max-width: 576px) {
 
     nav .navbar-search-form{
@@ -57,7 +85,8 @@
 }
 
 
-/* smaller screen */
+
+/* =============== smaller screen =============== */
 @media screen and (max-width: 400px) {
 
     
