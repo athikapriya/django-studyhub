@@ -1,0 +1,58 @@
+{% block css %}
+<style>
+
+    h3{
+        font-size: 0.95rem;
+        color : var(--color-text-secondary);
+    }
+
+    .create-room__btn{
+        background-color: var(--color-primary);
+        color: var(--color-btn-primary);
+        display: inline-block;
+        padding: 10px 18px;
+        border-radius: var(--border-radius);
+        font-weight: 500;
+    }
+
+</style>
+{% endblock %}
+
+
+<section class="feed-components">
+    <!-- =============== Feed header starts here =============== -->
+    <div class="d-flex justify-content-between">
+        <!-- available rooms starts -->
+        <div class="col-6">
+            <h2 class="text-uppercase mb-1">Rooms</h2>
+            <h3>{{room_count}} Rooms available</h3>
+        </div>
+        <!-- available rooms ends -->
+
+        <!-- add room btn starts -->
+        <div class="col-6">
+            <div class="d-flex justify-content-end align-items-end">
+                <a href="" class="d-flex justify-content-center align-items-center text-decoration-none create-room__btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                        viewBox="0 0 640 640"
+                        width="18"
+                        height="18"
+                        class="me-2"
+                        fill="currentColor">
+                        <title>add</title>
+                        <path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z"/>
+                    </svg>
+                    Create Room
+                </a>
+            </div>
+        </div>
+        <!-- add room btn ends -->
+    </div>
+    <!-- =============== feed header ends here =============== -->
+
+
+    <!-- =============== main feed starts here =============== -->
+
+    
+    <!-- =============== main feed ends here =============== -->
+</section>
