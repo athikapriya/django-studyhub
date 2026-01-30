@@ -2,15 +2,15 @@
 <nav class="navbar py-3">
     <div class="container">
 
-        <div class="d-flex justify-content-between">
-            <!-- navbar brand starts-->
+        <div class="d-flex ">
+            <!-- =============== navbar brand starts =============== -->
             <a href="{% url 'homepage' %}" class="navbar-brand d-flex justify-content-center align-items-center">
                 <img src="{% static 'images/logo.webp' %}" alt="Studyhub logo">
                 <h1 class="text-white fw-bold mb-0 ms-2">StudyHub</h1>
             </a>
-            <!-- navbar ends -->
+            <!-- =============== navbar brand ends =============== -->
 
-            <!-- search starts -->
+            <!-- =============== search starts =============== -->
             <form role="search" class="d-flex align-items-center navbar-search-form">
                 <div class="form-control form-control-sm d-flex align-items-center w-100">
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -24,17 +24,33 @@
                     <input type="search"  placeholder="Search for rooms" aria-label="search" class="navbar-search">
                 </div>
             </form>
-            <!-- search ends -->
+            <!-- =============== search ends =============== -->
         </div>
 
-        <!-- login search -->
-        <div style="height: 30px;" class="d-flex align-items-center">
-            <div class="me-3 h-100 rounded-circle">
-                <img src="{% static 'images/profile.svg' %}" alt="Profile picture" class="h-100 w-100 rounded-circle">
+
+        <!-- =============== dark mode btn and login starts =============== -->
+        <div class="d-flex align-items-center ms-auto gap-3 gap-lg-5">
+
+            <!-- dark mode btn -->
+            <div class="dark-toggle">
+                <input type="checkbox" id="darkSwitch">
+                <label for="darkSwitch"></label>
             </div>
-            <a href="" class="text-decoration-none login-btn">Login</a>
-        </div>
-        <!-- login ends -->
 
+            <!-- dark mode cdn -->
+            <script src="https://www.jqueryscript.net/demo/dark-mode-bootstrap/dark-mode-switch.min.js"></script>
+
+            <!-- login starts -->
+            <div style="height: 30px;" class="d-flex align-items-center">
+                <div class="me-3 h-100 rounded-circle">
+                    <img src="{% static 'images/profile.svg' %}" alt="Profile picture" class="h-100 w-100 rounded-circle">
+                </div>
+                <a href="" class="text-decoration-none login-btn">Login</a>
+            </div>
+            <!-- login ends -->
+
+        </div>
+        <!-- =============== dark mode btn and login starts =============== -->
+         
     </div>
 </nav>
