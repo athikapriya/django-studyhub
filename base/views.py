@@ -4,7 +4,7 @@ from .models import *
 
 
 
-# homepage view
+# =============== homepage view =============== 
 def homepage(request):
     rooms = Room.objects.all()
     context = {
@@ -13,7 +13,7 @@ def homepage(request):
     return render(request, 'base/homepage.html', context)
 
 
-# room view
+# =============== room view =============== 
 def room(request, slug):
     rooms = get_object_or_404(Room, slug=slug)
     context = {

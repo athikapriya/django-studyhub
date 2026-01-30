@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 
 
-# Topic model
+# =============== Topic model =============== 
 class Topic(models.Model):
     name = models.CharField(max_length=200)
 
@@ -12,7 +12,7 @@ class Topic(models.Model):
 
 
 
-# Room model
+# =============== Room model =============== 
 class Room(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
@@ -32,7 +32,7 @@ class Room(models.Model):
 
     
 
-# Message model
+# =============== Message model =============== 
 class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
