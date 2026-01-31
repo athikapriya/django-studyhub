@@ -25,6 +25,7 @@ body{
     /* Text */
     --color-text-primary: #ffffff;  
     --color-text-secondary: #8B8FA6; 
+    --color-text-tertiary: #a7acbd; 
 
     /* Surfaces & backgrounds */
     --color-bg-main: #3F4156; 
@@ -35,6 +36,9 @@ body{
 
     /* border radius */
     --border-radius: 5px;
+
+    /* transition */
+    --transition : 0.3s;
 }
 
 .color-primary{
@@ -47,6 +51,10 @@ body{
 
 .color-text-secondary{
     color: var(--color-text-secondary);
+}
+
+.color-text-tertiary{
+    color: #a7acbd;
 }
 
 .color-bg-main{
