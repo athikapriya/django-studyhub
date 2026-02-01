@@ -6,15 +6,6 @@
         color : var(--color-text-secondary);
     }
 
-    .create-room__btn{
-        background-color: #6BB7CD;
-        color: var(--color-btn-primary);
-        display: inline-block;
-        padding: 10px 18px;
-        border-radius: var(--border-radius);
-        font-weight: 500;
-    }
-
     .room-name__container{
         border-bottom: 1px solid var(--color-bg-surface);
     }
@@ -50,7 +41,7 @@
         <!-- add room btn starts -->
         <div class="col-6">
             <div class="d-flex justify-content-end align-items-end">
-                <a href="{% url 'create-room' %}" class="d-flex justify-content-center align-items-center text-decoration-none create-room__btn">
+                <a href="{% url 'create-room' %}" class="d-flex justify-content-center align-items-center text-decoration-none my-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" 
                         viewBox="0 0 640 640"
                         width="18"
