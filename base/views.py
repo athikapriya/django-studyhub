@@ -1,5 +1,6 @@
 # third-party imports
 from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Q
 
 
 # local app imports
@@ -10,13 +11,24 @@ from .forms import RoomForm
 
 # =============== homepage view =============== 
 def homepage(request):
-    rooms = Room.objects.all()
+    q = request.GET.get('q') if request.GET.get("q") != None else ""
+
+    rooms = Room.objects.filter(
+       Q(topic__name__icontains= q) |
+       Q(name__icontains = q) |
+       Q(description__icontains = q)
+    )
     room_count = rooms.count()
-    room_message = Message.objects.all()[0:5]
+    room_message = Message.objects.order_by("-created_at")[:5]
+
+    topics = Topic.objects.all()
+    topic_count = topics.count()
     context = {
         "rooms" : rooms,
         "room_count" : room_count,
-        "room_message" : room_message
+        "room_message" : room_message,
+        "topics" : topics,
+        "topic_count" : topic_count
     }
     return render(request, 'base/homepage.html', context)
 
@@ -38,7 +50,7 @@ def createRoom(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             room = form.save(commit=False)
-            request.host = request.user 
+            room.host = request.user 
             room.save()
             return redirect("homepage")
     else:
