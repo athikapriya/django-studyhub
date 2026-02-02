@@ -36,6 +36,10 @@ body{
     --color-btn-primary: #0F172A; 
     --color-btn-secondary : #4fa7c4;
 
+    /* Neutral action */
+    --color-neutral: #51546E;
+    --color-neutral-hover: #5d607d;
+
     /* border radius */
     --border-radius: 5px;
 
@@ -93,7 +97,7 @@ h2{
     background-color: #6BB7CD;
     color: var(--color-btn-primary);
     display: inline-block;
-    padding: 10px 18px;
+    padding: 8px 15px;
     border: none;
     border-radius: var(--border-radius);
     font-weight: 500;
@@ -102,6 +106,23 @@ h2{
 
 .my-btn:hover{
     background-color: var(--color-btn-secondary);
+}
+
+
+/* Cancel / neutral button */
+.my-btn--neutral {
+    background-color: var(--color-neutral);
+    color: var(--color-text-primary);
+    display: inline-block;
+    padding: 8px 14px;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.my-btn--neutral:hover {
+    background-color: var(--color-neutral-hover);
 }
 
 .btn:focus,
