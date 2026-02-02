@@ -1,4 +1,71 @@
+{% block css %}
+<style>
+a{
+    text-decoration: none !important;
+}
+
+.total-topic__container{
+    font-size: 0.92rem;
+}
+
+.total-topic{
+    padding: 0.18rem 0.45rem;
+    font-size: 0.85rem;
+}
+
+.topics{
+    margin-bottom: 1.7rem;
+}
+
+.topic-link{
+    font-size: 0.95rem;
+    letter-spacing: 0.025rem;
+    color: var(--color-text-tertiary);
+}
+
+.topic-link:hover{
+    color: var(--color-primary);
+}
+
+.follow-text {
+    background-color: var(--color-neutral);
+    color: var(--color-text-tertiary);
+    display: inline-block;
+    padding: 4px 10px;
+    border: none;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.follow-text:hover {
+    background-color: var(--color-neutral-hover);
+    color: var(--color-primary);
+}
+</style>
+{% endblock %}
+
+
 
 <aside id="topic-components">
     <h2 class="text-uppercase mb-1 color-text-secondary">browse topics</h2>
+
+    <!-- topic starts -->
+    <div class="mt-4">
+        <div class="mb-4">
+            <a href="{% url 'homepage' %}" class="d-flex justify-content-between align-items-center color-primary total-topic__container fw-semibold">
+                <span>All</span>
+                <span class="color-bg-main rounded-1 total-topic">{{topic_count}}</span>
+            </a>
+        </div>
+
+        {% for topic in topics %}
+        <div class="topics">
+            <a href="{% url 'homepage' %}?q={{topic.name}}" class="d-flex justify-content-between align-items-center topic-link fw-medium">
+                <span>{{topic.name|title}}</span>
+                <span class="follow-text">Follow</span>
+            </a>
+        </div>
+        {% endfor %}    
+    </div>
+    <!-- topic ends -->
 </aside>
