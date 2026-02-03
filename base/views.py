@@ -1,6 +1,6 @@
 # third-party imports
 from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import Q
+from django.db.models import Q, Count
 
 
 # local app imports
@@ -11,7 +11,7 @@ from .forms import RoomForm
 
 # =============== homepage view =============== 
 def homepage(request):
-    q = request.GET.get('q') if request.GET.get("q") != None else ""
+    q = request.GET.get('q') or ""
 
     rooms = Room.objects.filter(
        Q(topic__name__icontains= q) |
@@ -21,8 +21,8 @@ def homepage(request):
     room_count = rooms.count()
     room_message = Message.objects.order_by("-created_at")[:5]
 
-    topics = Topic.objects.all()
-    topic_count = topics.count()
+    topics = Topic.objects.all()[:9]
+    topic_count = Topic.objects.count()
     context = {
         "rooms" : rooms,
         "room_count" : room_count,
@@ -40,6 +40,26 @@ def room(request, slug):
         "room": room
     }
     return render(request, 'base/room.html', context)
+
+
+
+# =============== browse topics view =============== 
+def browseTopics(request):
+    q = request.GET.get('q') or ""
+
+    topics = Topic.objects.filter(
+        name__icontains= q
+    ).annotate(
+        room_count = Count("room")
+    )
+
+    topic_count = topics.count()
+
+    context = {
+        "topics": topics,
+        "topic_count": topic_count,
+    }
+    return render(request, "base/browse_topics.html", context)
 
 
 
