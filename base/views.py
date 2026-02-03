@@ -21,7 +21,10 @@ def homepage(request):
     room_count = rooms.count()
     room_message = Message.objects.order_by("-created_at")[:5]
 
-    topics = Topic.objects.all()[:9]
+    topics = Topic.objects.annotate(
+        room_count=Count("rooms")
+    )[:9]
+    
     topic_count = Topic.objects.count()
     context = {
         "rooms" : rooms,
@@ -50,7 +53,7 @@ def browseTopics(request):
     topics = Topic.objects.filter(
         name__icontains= q
     ).annotate(
-        room_count = Count("room")
+        room_count = Count("rooms")
     )
 
     topic_count = topics.count()
