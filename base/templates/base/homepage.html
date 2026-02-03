@@ -2,9 +2,18 @@
 {% block css %}
 
 <style>
+
+    .small-screen__activity{
+        display: none;
+    }
+
     @media screen and (max-width: 992px) {
         .activity-section{
             display: none;
+        }
+
+        .small-screen__activity{
+            display: block;
         }
     }
 
@@ -24,6 +33,9 @@
         <!-- ========== homepage topic components starts here ========== -->
         <div class="col-md-4 col-lg-3 g-4 topic-section">
             {% include 'base/topic_components.html' %}
+            <div class="small-screen__activity">
+                {% include 'base/activity_components.html' %}
+            </div>
         </div>
         <!-- ========== homepage topic components starts here ========== -->
 
