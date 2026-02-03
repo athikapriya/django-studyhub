@@ -1,24 +1,40 @@
 {% extends 'base/main.html' %}
+{% block css %}
 
+<style>
+    @media screen and (max-width: 992px) {
+        .activity-section{
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .topic-section{
+            display: none;
+        }
+    }
+</style>
+
+{% endblock %}
 {% block content %}
 
 <main class="container">
     <div class="row">
 
         <!-- ========== homepage topic components starts here ========== -->
-        <div class="col-lg-3 g-4">
+        <div class="col-md-4 col-lg-3 g-4 topic-section">
             {% include 'base/topic_components.html' %}
         </div>
         <!-- ========== homepage topic components starts here ========== -->
 
         <!-- ========== feed components starts here ========== -->
-        <div class="col-lg-6 g-4">
+        <div class="col-md-8 col-lg-6 g-4">
             {% include 'base/feed_components.html' %}
         </div>
         <!-- ========== feed_components ends here ========== -->
 
         <!-- ========== activity starts here ========== -->
-        <div class="col-lg-3 g-4">
+        <div class="col-lg-3 g-4 activity-section">
             {% include 'base/activity_components.html' %}
         </div>
         <!-- ========== activity ends here ========== -->
