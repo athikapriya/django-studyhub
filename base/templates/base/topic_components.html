@@ -63,7 +63,10 @@ a{
         {% for topic in topics %}
         <div class="topics">
             <a href="{% url 'homepage' %}?q={{topic.name}}" class="d-flex justify-content-between align-items-center topic-link fw-medium">
-                <span>{{topic.name|title}}</span>
+                <span>
+                    {{ topic.name|title }}
+                    ( {{ topic.room_count }} )
+                </span>
                 <span class="follow-text">Follow</span>
             </a>
         </div>
