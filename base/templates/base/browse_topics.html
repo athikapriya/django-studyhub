@@ -1,0 +1,126 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block css %}
+<style>
+
+.total-topic__container{
+    font-size: 0.92rem;
+}
+
+.total-topic{
+    padding: 0.18rem 0.45rem;
+    font-size: 0.85rem;
+}
+
+.topics{
+    border-bottom: 1px solid var(--color-neutral);
+}
+
+.topics:last-child{
+    border-bottom: none;
+    padding-bottom: 0px !important;
+}
+    
+.topic-link{
+    font-size: 0.95rem;
+    letter-spacing: 0.025rem;
+    color: var(--color-text-tertiary);
+}
+
+.topic-link:hover, .topic-link:hover span{
+    color: var(--color-primary);
+}
+
+.follow-text {
+    color: var(--color-text-tertiary);
+    display: inline-block;
+    padding: 4px 10px;
+    border: none;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.follow-text:hover {
+    color: var(--color-primary);
+}
+
+</style>
+{% endblock %}
+{% block content %}
+<!-- =============== all topics starts here =============== -->
+
+<section id="all-topics">
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-8 col-lg-6 mx-auto">
+
+                <!-- card header starts -->
+                <div class="card text-bg-secondary mb-3">
+                    <div class="card-header d-flex align-items-center gap-2 text-uppercase color-text-primary color-bg-surface">
+                        <a href="{% url 'homepage' %}" class="text-decoration-none d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                            viewBox="0 0 640 640"
+                            width="18"
+                            height="18"
+                            fill="currentColor"
+                            class="color-text-primary">
+                                <title>Back</title>
+                                <path d="M41.4 297.4C28.9 309.9 28.9 330.2 41.4 342.7L169.4 470.7C181.9 483.2 202.2 483.2 214.7 470.7C227.2 458.2 227.2 437.9 214.7 425.4L141.3 352L576 352C593.7 352 608 337.7 608 320C608 302.3 593.7 288 576 288L141.3 288L214.7 214.6C227.2 202.1 227.2 181.8 214.7 169.3C202.2 156.8 181.9 156.8 169.4 169.3L41.4 297.3z"/>
+                            </svg>
+                    </a>
+                    <span>Browse Topics</span>
+                </div>
+                <!-- card header ends -->
+
+                <!-- card body starts -->
+                <div class="card-body color-bg-main p-4">
+
+                    <!-- =============== search starts =============== -->
+                    <form  method="GET" action="{% url 'browse-topics' %}" role="search" class="d-flex align-items-center search-bar mb-3">
+                        <div class="form-control form-control-sm d-flex align-items-center w-100">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 640 640"
+                                width="20"
+                                height="20"
+                                fill="currentColor"
+                                class=" ms-2 me-1 ">
+                                <title>Search</title>
+                                <path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/>
+                                </svg>
+                            <input type="search" name="q"  placeholder="Search for topics" aria-label="search" class="search-input">
+                        </div>
+                    </form>
+                    <!-- =============== search ends =============== -->
+
+                    <!-- =============== all topics starts =============== -->
+                    <div class="topics py-3">
+                        <a href="{% url 'browse-topics' %}" class="d-flex justify-content-between align-items-center color-primary total-topic__container fw-semibold text-decoration-none">
+                            <span>All</span>
+                            <span class="total-topic">{{topic_count}}</span>
+                        </a>
+                    </div>
+                    {% for topic in topics %}
+                    <div class="topics py-3">
+                        <a href="{% url 'homepage' %}?q={{topic.name}}" class="d-flex justify-content-between text-decoration-none align-items-center topic-link fw-medium">
+                            <span>
+                                {{topic.name|title}}
+                                ( {{topic.room_count|default:0}} )
+                            </span>
+                            <span class="follow-text">Follow</span>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    <!-- =============== all topics ends =============== -->
+                    
+                </div>
+                <!-- card body ends -->
+
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =============== all topics ends here =============== -->
+{% endblock %}
+
