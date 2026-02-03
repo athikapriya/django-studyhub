@@ -15,7 +15,7 @@ class Topic(models.Model):
 # =============== Room model =============== 
 class Room(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
+    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, related_name="rooms")
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True, blank=True)
