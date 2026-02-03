@@ -57,7 +57,8 @@ def createRoom(request):
         form = RoomForm()
 
     context = {
-        "form" : form
+        "form" : form,
+        "btn_text" : "Create Room"
     }
     return render(request, 'base/room_form.html', context)
 
@@ -75,7 +76,8 @@ def updateRoom(request, pk):
             return redirect("room", slug=room.slug)
     context = {
         "room" : room,
-        "form" : form
+        "form" : form,
+        "btn_text" : "Update Room"
     }
     return render(request, 'base/room_form.html', context)
 
