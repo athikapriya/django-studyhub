@@ -196,12 +196,12 @@ nav h1{
     letter-spacing: 0.002rem;
 }
 
-nav .form-control{
+.form-control{
     background-color: var(--color-bg-surface);
     border: none;
 }
 
-nav .form-control input {
+.form-control input {
     border: none;
     padding: 5px;
     background-color: var(--color-bg-surface);
@@ -211,12 +211,12 @@ nav .form-control input {
     min-width: 0;
 }
 
-nav .navbar-search::placeholder, nav svg{
+.search-input::placeholder, .search-bar svg{
     color: #c0c0c0;
     opacity: 1;
 }
 
-nav .navbar-search-form{
+nav .search-bar{
     margin-left: 70px;
     width: 320px;
 }

@@ -21,7 +21,7 @@
 
 /* =============== large screen =============== */
 @media screen and (max-width: 992px) {
-    .navbar-search-form {
+    nav .search-bar {
         width: 250px;
         margin-left: 30px !important;
     }
@@ -49,8 +49,8 @@
         padding: 3px;
     }
 
-    .navbar-search-form {
-        width: 230px !important;
+    nav .search-bar {
+        width: 250px !important;
     }
 
     .dark-toggle label {
@@ -78,7 +78,7 @@
 /* =============== small screen =============== */
 @media screen and (max-width: 576px) {
 
-    nav .navbar-search-form{
+    nav .search-bar{
         display: none !important;
     }
 
