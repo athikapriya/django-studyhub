@@ -16,7 +16,7 @@
 /* =============== large screen =============== */
 @media screen and (max-width: 992px) {
     nav .search-bar {
-        width: 250px;
+        width: 300px;
         margin-left: 30px !important;
     }
 
@@ -29,11 +29,7 @@
 
 
 /* =============== medium screen  =============== */ 
-@media (max-width: 768px) {
-
-    h1{
-        display: none;
-    }
+@media screen and (max-width: 768px) {
 
     .navbar-brand{
         height: 40px;
@@ -44,7 +40,7 @@
     }
 
     nav .search-bar {
-        width: 250px !important;
+        display: none !important;
     }
 
     .dark-toggle label {
@@ -71,10 +67,6 @@
 
 /* =============== small screen =============== */
 @media screen and (max-width: 576px) {
-
-    nav .search-bar{
-        display: none !important;
-    }
 
 }
 
