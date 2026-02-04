@@ -47,6 +47,13 @@ def loginPage(request):
 
 
 
+# =============== logout view =============== 
+def logoutUser(request):
+    logout(request)
+    return redirect("login")
+
+
+
 # =============== homepage view =============== 
 def homepage(request):
     q = request.GET.get('q') or ""
