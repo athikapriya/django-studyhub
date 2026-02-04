@@ -4,6 +4,7 @@ from django.db.models import Q, Count
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 # local app imports
@@ -21,18 +22,18 @@ def loginPage(request):
         password = request.POST.get("password", "")
 
         if not email or not password:
-            messages.error(request, "Both fields are required")
+            messages.error(request, "Both fields are required", extra_tags="auth")
             return render(request, 'base/login_form.html')
 
         if User.objects.filter(email=email).count() > 1:
-            messages.error(request, "Multiple accounts found with this email")
+            messages.error(request, "Multiple accounts found with this email", extra_tags="auth")
             return render(request, 'base/login_form.html')
 
         try:
             user = User.objects.get(email=email)
             username = user.username
         except User.DoesNotExist:
-            messages.error(request,  "User doesn't exist")
+            messages.error(request,  "User doesn't exist", extra_tags="auth")
             return render(request, 'base/login_form.html')
 
         user = authenticate(request, username=username, password=password)
@@ -41,7 +42,7 @@ def loginPage(request):
             login(request, user)
             return redirect("homepage")
         else:
-            messages.error(request, "Email or password is incorrect")
+            messages.error(request, "Email or password is incorrect", extra_tags="auth")
 
     return render(request, 'base/login_form.html')
 
@@ -112,6 +113,7 @@ def browseTopics(request):
 
 
 # =============== Room create view =============== 
+@login_required(login_url='login')
 def createRoom(request):
     if request.method == "POST":
         print(request.POST)
@@ -133,9 +135,14 @@ def createRoom(request):
 
 
 # =============== Room update view =============== 
+@login_required(login_url='login')
 def updateRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
     form = RoomForm(instance=room)
+
+    if request.user != room.host:
+        messages.error(request, "Sorry! You are not allowed to update this room.")
+        return redirect("room", slug=room.slug)
 
     if request.method == "POST":
         form = RoomForm(request.POST, instance=room)
@@ -152,8 +159,13 @@ def updateRoom(request, pk):
 
 
 # =============== Room delete view =============== 
+@login_required(login_url='login')
 def deleteRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
+
+    if request.user != room.host:
+        messages.error(request, "Sorry! You are not allowed to delete this room.")
+        return redirect("room", slug=room.slug)
 
     if request.method == "POST":
         room.delete()
