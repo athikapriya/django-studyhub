@@ -42,12 +42,27 @@
     {% include 'base/navbar.html' %}
     <!-- ========== nav section ends ========== -->
 
-    
+
     <!-- ========== main section starts here ========== -->
         {% block content %}
         {% endblock %}  
     <!-- ========== main section ends here ========== -->
 
+
+    <!-- =============== handling messages =============== -->
+    {% if messages %}
+        <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+        {% for message in messages %}
+            {% if "auth" not in message.tags %}
+                <div class="toast text-bg-{{ message.tags }} border-0 show"
+                    data-bs-delay="4000"
+                    data-bs-autohide="true">
+                    <div class="toast-body color-btn-primary">{{ message }}</div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %}
 
 
     <!-- jqueryscript cdn -->

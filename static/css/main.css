@@ -71,6 +71,11 @@ body{
     background-color: var(--color-bg-surface);
 }
 
+.color-btn-primary{
+    color: var(--color-btn-primary);
+}
+
+
 h2{
     font-size: 0.95rem;
     line-height: 1.5rem;
