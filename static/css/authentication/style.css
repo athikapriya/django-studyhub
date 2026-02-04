@@ -1,0 +1,90 @@
+
+.card-body{
+    padding: 2rem;
+}
+
+h2{
+    font-size: 1.125rem;
+}
+
+.form-input-custom{
+    background-color: transparent;
+    border:1px solid var(--color-neutral-hover);
+    border-radius: 3px;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+}
+
+.form-input-custom::placeholder{
+    font-size: 0.88rem;
+}
+
+.form-input-custom:focus{
+    background-color: transparent;
+    border: 1px solid var(--color-btn-secondary);
+}
+
+.btn-container{
+    margin: 1.25rem 0rem ;
+    margin-bottom: 1.5rem;
+}
+
+.my-btn{
+    padding:8px 18px;
+}
+
+.sign-up__contaner p{
+    color: var(--color-text-tertiary);
+    font-size: 0.95rem;
+}
+
+.sign-up__btn{
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.95rem;
+    padding-bottom: 0.20rem;
+    position: relative;
+}
+
+.sign-up__btn::after{
+    content : '';
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 0%;
+    height: 1px;
+    background-color: var(--color-primary);
+    transition: var(--transition);
+}
+
+.sign-up__btn:hover::after{
+    width: 100%;
+    left: 0;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 38px;
+    right: 12px;
+    cursor: pointer;
+    color: var(--color-neutral-hover);
+    z-index: 10;
+}
+
+.toggle-password:hover {
+    color: var(--color-neutral-hover);
+}
+
+.fa-eye, .fa-eye-slash{
+    font-size: 0.9rem;
+}
+
+.error-msg{
+    font-size: 0.9rem;
+}
+
+@media screen and (max-width:576px) {
+    .card-body{
+        padding: 1.25rem;
+    }
+}

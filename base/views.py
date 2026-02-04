@@ -1,11 +1,49 @@
 # third-party imports
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q, Count
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 
 
 # local app imports
 from .models import *
 from .forms import RoomForm
+
+
+
+
+# =============== Login view =============== 
+def loginPage(request):
+
+    if request.method == "POST":
+        email = request.POST.get('email', "").lower()
+        password = request.POST.get("password", "")
+
+        if not email or not password:
+            messages.error(request, "Both fields are required")
+            return render(request, 'base/login_form.html')
+
+        if User.objects.filter(email=email).count() > 1:
+            messages.error(request, "Multiple accounts found with this email")
+            return render(request, 'base/login_form.html')
+
+        try:
+            user = User.objects.get(email=email)
+            username = user.username
+        except User.DoesNotExist:
+            messages.error(request,  "User doesn't exist")
+            return render(request, 'base/login_form.html')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect("homepage")
+        else:
+            messages.error(request, "Email or password is incorrect")
+
+    return render(request, 'base/login_form.html')
 
 
 
