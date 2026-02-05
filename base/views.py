@@ -17,6 +17,9 @@ from .forms import RoomForm
 # =============== Login view =============== 
 def loginPage(request):
 
+    if request.user.is_authenticated:
+        return redirect("homepage")
+
     if request.method == "POST":
         email = request.POST.get('email', "").lower()
         password = request.POST.get("password", "")
