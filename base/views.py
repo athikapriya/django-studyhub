@@ -5,17 +5,19 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 
 # local app imports
 from .models import *
-from .forms import RoomForm
+from .forms import RoomForm, CreateUserForm
 
 
 
 
 # =============== Login view =============== 
 def loginPage(request):
+    page = "login"
 
     if request.user.is_authenticated:
         return redirect("homepage")
@@ -47,7 +49,10 @@ def loginPage(request):
         else:
             messages.error(request, "Email or password is incorrect", extra_tags="auth")
 
-    return render(request, 'base/login_form.html')
+    context = {
+        "page" : page
+    }
+    return render(request, 'base/user_auth.html')
 
 
 
@@ -55,6 +60,16 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect("login")
+
+
+
+# =============== register view =============== 
+def registerUser(request):
+    form = CreateUserForm()
+    context = {
+        "form" : form
+    }
+    return render(request, 'base/user_auth.html', context)
 
 
 

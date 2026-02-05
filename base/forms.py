@@ -2,11 +2,47 @@
 from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 # local app imports 
 from .models import Room
 
 
+
+# =============== user form =============== 
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ["username", "email", 'password1', "password2"]
+
+
+        widgets = {
+            "username" : forms.TextInput(attrs={
+                "class" : "form-control form-control-sm form-input-custom",
+                "placeholder" : "e.g. john doe"
+            }),
+            "email" : forms.EmailInput(attrs={
+                "class" : "form-control form-control-sm form-input-custom",
+                "placeholder" : "e.g. johndoe@gmail.com"
+            })
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["password1"].widget.attrs.update({
+            "class": "form-control form-control-sm form-input-custom",
+            "placeholder": "••••••••",
+        })
+
+        self.fields["password2"].widget.attrs.update({
+            "class": "form-control form-control-sm form-input-custom",
+            "placeholder": "••••••••",
+        })
+
+
+# =============== room form =============== 
 class RoomForm(ModelForm):
     class Meta:
         model = Room
