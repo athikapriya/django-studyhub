@@ -1,0 +1,55 @@
+
+
+<div class="chat-room p-4 mt-4">
+    {% for message in room_messages %}
+    <div class="my-4 py-1 px-3 comment">
+        <div class="d-flex justify-content-between">
+            <!-- =============== left side : user info starts =============== -->
+            <div class="d-flex gap-3 align-items-center">
+                <a href="" class="text-decoration-none color-primary">@{{message.user}}</a>
+                <span class="color-text-secondary" style="font-size: 14px;">Sent at {{message.created_at|date:"M Y, g:i A"}}</span>
+            </div>
+            <!-- =============== left side : user info ends =============== -->
+
+            <!-- =============== right side : user actions starts =============== -->
+            {% if request.user == message.user %}
+                <div class="dropdown">
+                    <!-- dropdown button -->
+                    <button class="btn btn-sm border-0 text-white" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                    </svg>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                        <li>
+                            <!-- trigger modal -->
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editMessageModal{{ message.id }}">
+                                Edit
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteMessageModal{{ message.id }}">Delete</a>
+                        </li>
+                    </ul>
+                </div>
+            <!-- =============== right side : user actions starts =============== -->
+
+
+            <!-- =============== update modal starts here =============== -->
+            {% include 'base/room/update_message.html' %}
+            <!-- =============== update modal ends here =============== -->
+
+
+
+            <!-- =============== delete modal starts here =============== -->
+            {% include 'base/room/delete_message.html' %}
+            <!-- =============== delete modal ends here =============== -->
+            {% endif %}
+            
+        </div>
+
+        <p class="my-1 pb-0 color-text-tertiary">{{message.body}}</p>
+    </div>
+{% endfor %}
+
+</div>

@@ -1,0 +1,23 @@
+
+
+<div class="modal fade" id="deleteMessageModal{{ message.id }}" tabindex="-1" aria-labelledby="deleteMessageLabel{{ message.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <form action="{% url 'delete-message' message.id %}" method="POST">
+            {% csrf_token %}
+            
+            <div class="modal-header">
+                <h5 class="modal-title color-text-primary" id="editMessageLabel{{ message.id }}">Delete Message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0 color-text-primary">Are you sure to delete the message?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,63 @@
 {% extends 'base/main.html' %}
 
+{% block css %}
+<style>
+    .gx-5 {
+        --bs-gutter-x: 2rem;
+    }
+
+    .room-name{
+        font-size: 1.45rem;
+    }
+
+    .chat-room{
+        background-color: #2D2D39;
+        border-radius: 8px;
+    }
+
+    .dropdown-menu{
+        --bs-dropdown-min-width: 6rem;
+        --bs-dropdown-bg: var(--color-text-primary);
+    }
+
+    .dropdown-item, .dropdown-item:hover, .dropdown-item:active, .dropdown-item:visited{
+        color: var(--color-btn-primary);
+        background-color: var(--color-text-primary) !important;
+    }
+
+    .comment{
+        border-left: 2px solid var(--color-neutral);
+    }
+
+    
+</style>
+{% endblock %}
+
 {% block content %}
 
-<h2>{{room.name}}</h2>
-<p>Host @{{room.host}}</p>
+<!-- =============== room section starts here =============== -->
 
-<p>{{room.topic}}</p>
+<section id="study-room">
+    <div class="container">
+        <div class="row">
+            
+            <!-- =============== main conversation starts =============== -->
+            <div class="col-md-9 gy-4 gx-5">
+                {% include 'base/room/main_room.html' %}
+            </div>
+            <!-- =============== main conversation ends =============== -->
 
-<a href="{% url 'update-room' room.id %}">Update Room</a>
-<a href="{% url 'delete-room' room.id %}">Delete Room</a>
+
+            <!-- =============== participants starts here =============== -->
+            <div class="col-md-3 gy-4 gx-5">
+                {% include 'base/room/participant_components.html' %}
+            </div>
+            <!-- =============== participants ends here =============== -->
+
+        </div>
+    </div>
+</section>
+
+<!-- =============== room section ends here =============== -->
 
 {% endblock %}

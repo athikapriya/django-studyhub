@@ -83,7 +83,7 @@ h2{
 
 .card{
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
 .card-header{
@@ -236,3 +236,26 @@ h1{
 }
 
 /* ========== nav ends ========== */
+
+
+/* modal starts */
+.modal-content{
+    background-color: #2D2D39
+}
+
+.modal-content textarea{
+    resize: none;
+    background-color: var(--color-bg-main);
+}
+textarea.form-control:focus {
+    box-shadow: 0 0 0 0.25rem var(--color-bg-surface)!important;
+    background-color: var(--color-bg-main);
+    outline: none;
+}
+
+.modal-header, .modal-footer{
+    border : none
+}
+
+
+/* modal ends */

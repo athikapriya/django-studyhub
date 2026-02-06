@@ -115,8 +115,31 @@ def homepage(request):
 # =============== room view =============== 
 def room(request, slug):
     room = get_object_or_404(Room, slug=slug)
+    room_messages = room.message_set.all()
+    participants = room.participants.all()
+    total_participant = participants.count()
+
+    if request.method == "POST":
+        if not request.user.is_authenticated:
+            return redirect("login")
+    
+        body = request.POST.get("body")
+
+        if body:
+            Message.objects.create(
+                user = request.user,
+                room = room,
+                body = body
+            )
+            room.participants.add(request.user)
+
+        return redirect("room", slug=slug)
+    
     context = {
-        "room": room
+        "room": room,
+        "room_messages" : room_messages,
+        "participants" : participants,
+        "total_participant" : total_participant
     }
     return render(request, 'base/room.html', context)
 
@@ -204,3 +227,34 @@ def deleteRoom(request, pk):
         "room" : room
     }
     return render(request, "base/delete_room.html", context)
+
+
+@login_required(login_url='login')
+def updateMessage(request, pk):
+    message = get_object_or_404(Message, id=pk)
+
+    if request.user != message.user:
+        messages.error(request, "You can't edit this message.")
+        return redirect("room", slug=message.room.slug)
+
+    if request.method == "POST":
+        body = request.POST.get("body")
+        if body:
+            message.body = body
+            message.save()
+        return redirect("room", slug=message.room.slug)
+
+    context = {"message": message}
+    return render(request, "base/update_message.html", context)
+
+
+@login_required(login_url='login')
+def deleteMessage(request, pk):
+    message = get_object_or_404(Message, id=pk)
+
+    if request.method == "POST":
+        message.delete()
+        return redirect("room", slug=message.room.slug)
+
+    context = {"message": message}
+    return render(request, "base/update_message.html", context)
