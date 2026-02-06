@@ -1,0 +1,106 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'css/authentication/style.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- =============== register section starts =============== -->
+
+<section id="register-page">
+    <div class="container my-5">
+        <div class="row">
+            <div class="px-4 px-sm-0 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
+                <div class="card  mb-3">
+
+                    <!-- card header starts -->
+                    <div class="card-header text-center color-text-primary color-bg-surface">
+                        Register
+                    </div>
+                    <!-- card header ends -->
+
+                    <!-- card body starts -->
+                    <div class="card-body color-bg-main">
+                        <!-- =============== form =============== -->
+                        <form action="" method="POST" class="">
+                                {% csrf_token %}
+
+                                <!-- =============== username field =============== -->
+                                <div class="mb-4">
+                                    <label for="name" class="form-label">Username</label>
+                                    {{form.username}}
+                                </div>
+                                
+                                <!-- =============== email field =============== -->
+                                <div class="mb-4">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    {{form.email}}
+                                </div>
+
+                                <!-- =============== password1 field =============== -->
+                                <div class="mb-4 position-relative">
+                                    <label for="password" class="form-label">Password</label>
+                                    {{form.password1}}
+                                    <span class="toggle-password">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </span>
+                                </div>
+
+                                <!-- =============== password2 field =============== -->
+                                <div class="mb-3 position-relative">
+                                    <label for="password" class="form-label">Confirm Password</label>
+                                    {{form.password2}}
+                                    <span class="toggle-password">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </span>
+                                </div>
+
+
+                                <!-- =============== error messages starts =============== -->
+                                <div class="text-center error-msg">
+                                    {% for message in messages %}
+                                        <p class="mb-2 text-center color-text-primary">{{message}}</p>
+                                    {% endfor %}
+                                </div>
+                                <!-- =============== error messages ends =============== -->
+
+                                
+                                <!-- =============== register btn =============== -->
+                                <div class="btn-container">
+                                    <button type="submit" class="my-btn d-flex justify-content-center align-items-center gap-2 fw-normal">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
+                                        </svg>
+                                        Register
+                                    </button>
+                                </div>
+                                
+                        </form>
+                        <!-- =============== form =============== -->
+
+
+                        <!-- =============== for signup =============== -->
+                        <div class="text-center sign-up__contaner">
+                            <p class="mb-1">Already have an account?</p>
+                            <a href="{% url 'login' %}" class="color-primary sign-up__btn" >Login</a>
+                        </div>
+
+                    </div>
+                    <!-- card body ends -->
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =============== register section ends =============== -->
+
+{% endblock %}
+
+
+{% block script %}
+<script src="{% static 'scripts/authentication/script.js' %}"></script>
+{% endblock %} 

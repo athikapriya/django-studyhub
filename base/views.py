@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 
 
 # local app imports
@@ -17,7 +16,6 @@ from .forms import RoomForm, CreateUserForm
 
 # =============== Login view =============== 
 def loginPage(request):
-    page = "login"
 
     if request.user.is_authenticated:
         return redirect("homepage")
@@ -50,9 +48,9 @@ def loginPage(request):
             messages.error(request, "Email or password is incorrect", extra_tags="auth")
 
     context = {
-        "page" : page
+       
     }
-    return render(request, 'base/user_auth.html')
+    return render(request, 'base/login_form.html', context)
 
 
 
@@ -66,10 +64,24 @@ def logoutUser(request):
 # =============== register view =============== 
 def registerUser(request):
     form = CreateUserForm()
+
+    if request.method == "POST":
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+
+            messages.success(request, "Account created successfully. Please log in.", extra_tags="auth")
+            return redirect('login')  
+
+        else:
+            messages.error(request, "An error occurred during registration", extra_tags='auth')
+
     context = {
-        "form" : form
+        "form": form
     }
-    return render(request, 'base/user_auth.html', context)
+    return render(request, 'base/register_form.html', context)
 
 
 
