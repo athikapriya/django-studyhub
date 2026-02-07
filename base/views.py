@@ -95,7 +95,9 @@ def homepage(request):
        Q(description__icontains = q)
     )
     room_count = rooms.count()
-    room_message = Message.objects.order_by("-created_at")[:5]
+    room_message = Message.objects.filter(
+        Q(room__topic__name__icontains=q)
+    )
 
     topics = Topic.objects.annotate(
         room_count=Count("rooms")

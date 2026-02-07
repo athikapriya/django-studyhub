@@ -14,7 +14,18 @@
     <div class="card text-bg-secondary mb-3" style="max-width: 18rem;">
         <div class="card-header text-uppercase color-text-primary color-bg-surface">recent activities</div>
         <div class="card-body color-bg-main">
+            {% for message in room_message %}
+            <div>
+                <p>@{{message.user}} {{message.created_at|timesince}}</p>
+                <p>reply to '{{message.room}}' </p>
+                <p>{{message}}</p>
 
+                    {% if request.user == message.user %}
+                        <a href="{% url 'delete-message' message.id %}">Delete</a>
+                    {% endif %}
+                <hr>
+            </div>
+            {% endfor %}
         </div>
     </div>
     <!-- =============== recent activity section ends here =============== -->
