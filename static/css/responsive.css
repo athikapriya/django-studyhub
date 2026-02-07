@@ -43,21 +43,8 @@
         display: none !important;
     }
 
-    .dark-toggle label {
-        width: 2rem;
-        height: 1.01rem;
-    }
-
-    .dark-toggle label::after {
-        width: 0.75rem;
-        height: 0.75rem;
-        top: 0.129rem;
-        left: 3px;
-    }
-
-    .dark-toggle input:checked + label::after {
-        top: 0.12965rem;
-        left: 1.05rem;
+     .message-sender{
+        font-size: 0.9rem !important;
     }
 
 }
@@ -67,7 +54,11 @@
 
 /* =============== small screen =============== */
 @media screen and (max-width: 576px) {
+    .room-header{
+        flex-direction: column;
+    }
 
+   
 }
 
 

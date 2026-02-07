@@ -62,19 +62,19 @@
         <!-- =============== main room starts here =============== -->
 
         <!-- room header -->
-        <div class="room-header d-flex justify-content-between">
+        <div class="room-header d-flex justify-content-between align-items-start align-items-sm-center">
             <div class="room-name">
                 <a href="{% url 'room' room.slug %}" class="text-decoration-none color-primary fw-medium ">{{room.name}}</a>
             </div>
             <div>
-                <small style="font-size: 14px;" class="color-text-tertiary">{{room.created_at|timesince}} ago </small>
+                <small  class="color-text-tertiary">{{room.created_at|timesince}} ago </small>
             </div>
         </div>
 
         <!-- room body -->
-        <div class="room-body my-3">
+        <div class="room-body mt-2 mb-1">
             
-            <p class="color-text-secondary fw-bold mb-1 pb-0" style="font-size:15px;">Hosted by</p>
+            <p class="color-text-secondary fw-bold mb-1 pb-0" style="font-size: 15px;">Hosted by</p>
             <a href="" class="text-decoration-none color-primary"><i>@</i>{{room.host}}</a>
             
 
@@ -84,10 +84,19 @@
 
             <!-- =============== comment btn starts here =============== -->
             {% if request.user.is_authenticated %}
-            <div class="comment-wrapper">
+            <div class="comment-wrapper mt-3">
+
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <input type="text" name="body" placeholder="Write your message here...">
+                    <input type="text" name="body" placeholder="Write your message here..." class="form-control form-input-custom ">
+
+                    <button type="submit" class="send-btn">
+                        <!-- Right arrow icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" height="16" width="16" fill="currentColor" class="color-text-primary">
+                            <path d="M322.5 351.7L523.4 150.9L391 520.3L322.5 351.7zM489.4 117L288.6 317.8L120 249.3L489.4 117zM70.1 280.8L275.9 364.4L359.5 570.2C364.8 583.3 377.6 591.9 391.8 591.9C406.5 591.9 419.6 582.7 424.6 568.8L602.6 72C606.1 62.2 603.6 51.4 596.3 44C589 36.6 578.1 34.2 568.3 37.7L71.4 215.7C57.5 220.7 48.3 233.8 48.3 248.5C48.3 262.7 56.9 275.5 70 280.8z"/>
+                        </svg>
+                    </button>
+
                 </form>
             </div>
             {% endif %}

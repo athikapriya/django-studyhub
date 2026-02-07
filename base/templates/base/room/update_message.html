@@ -1,22 +1,9 @@
-
-
-<div class="modal fade" id="editMessageModal{{ message.id }}" tabindex="-1" aria-labelledby="editMessageLabel{{ message.id }}" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <form action="{% url 'update-message' message.id %}" method="POST">
+<div class="offcanvas offcanvas-bottom " id="editMessage{{ message.id }}" style="background-color: 2d2d39;">
+    <div class="offcanvas-body ">
+        <form method="POST" action="{% url 'update-message' message.id %}">
             {% csrf_token %}
-            <div class="modal-header">
-                <h5 class="modal-title color-text-primary" id="editMessageLabel{{ message.id }}">Edit Message</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
-            </div>
-            <div class="modal-body">
-                <textarea name="body" class="form-control" rows="3">{{ message.body }}</textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
+            <textarea class="form-control textarea-custom " rows="1" style="resize:none;" name="body">{{ message.body }}</textarea>
+            <button class="btn my-btn mt-3" type="submit">Update</button>
         </form>
-        </div>
     </div>
 </div>

@@ -2,12 +2,14 @@
 
 <div class="chat-room p-4 mt-4">
     {% for message in room_messages %}
-    <div class="my-4 py-1 px-3 comment">
+    <div class=" py-1 ps-3 comment">
         <div class="d-flex justify-content-between">
             <!-- =============== left side : user info starts =============== -->
-            <div class="d-flex gap-3 align-items-center">
-                <a href="" class="text-decoration-none color-primary">@{{message.user}}</a>
-                <span class="color-text-secondary" style="font-size: 14px;">Sent at {{message.created_at|date:"M Y, g:i A"}}</span>
+            <div class="d-flex gap-2 gap-md-4 align-items-start align-items-md-center comment-header">
+                <a href="" class="text-decoration-none color-primary message-sender">@{{message.user}}</a>
+                <small class="color-text-secondary">
+                    Sent on {{ message.created_at|timesince }} ago
+                </small>
             </div>
             <!-- =============== left side : user info ends =============== -->
 
@@ -23,21 +25,23 @@
                     <ul class="dropdown-menu dropdown-menu-end shadow-sm">
                         <li>
                             <!-- trigger modal -->
-                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#editMessageModal{{ message.id }}">
+                            <button class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#editMessage{{ message.id }}">
                                 Edit
-                            </a>
+                            </button>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteMessageModal{{ message.id }}">Delete</a>
+                            <button class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#deleteMessage{{ message.id }}">
+                                Delete
+                            </button>
                         </li>
                     </ul>
                 </div>
             <!-- =============== right side : user actions starts =============== -->
 
 
-            <!-- =============== update modal starts here =============== -->
+            <!-- =============== update offcanvas starts here =============== -->
             {% include 'base/room/update_message.html' %}
-            <!-- =============== update modal ends here =============== -->
+            <!-- =============== update offcanvas ends here =============== -->
 
 
 
@@ -50,6 +54,6 @@
 
         <p class="my-1 pb-0 color-text-tertiary">{{message.body}}</p>
     </div>
-{% endfor %}
+    {% endfor %}
 
 </div>

@@ -206,7 +206,7 @@ nav h1{
     border: none;
 }
 
-.form-control input {
+.form-control input, .form-control textarea {
     border: none;
     padding: 5px;
     background-color: var(--color-bg-surface);
@@ -239,7 +239,7 @@ h1{
 
 
 /* modal starts */
-.modal-content{
+/* .modal-content{
     background-color: #2D2D39
 }
 
@@ -255,7 +255,12 @@ textarea.form-control:focus {
 
 .modal-header, .modal-footer{
     border : none
-}
+} */
 
 
 /* modal ends */
+
+/* msg edit/delete offcanvas starts */
+
+
+/* msg edit/delete offcanvas ends */

@@ -10,6 +10,10 @@
         font-size: 1.45rem;
     }
 
+    .room-header small, .chat-room small{
+        font-size: 0.85rem;
+    }
+
     .chat-room{
         background-color: #2D2D39;
         border-radius: 8px;
@@ -25,8 +29,55 @@
         background-color: var(--color-text-primary) !important;
     }
 
-    .comment{
+    .chat-room .comment {
+        margin-top: 1rem; 
+        margin-bottom: 1rem;
         border-left: 2px solid var(--color-neutral);
+    }
+
+    .chat-room .comment:first-child {
+        margin-top: 0;
+    }
+
+    .chat-room .comment:last-child {
+        margin-bottom: 0;
+    }
+
+
+    .offcanvas.offcanvas-bottom{
+        height: auto;
+        background-color: #2D2D39;
+    }
+
+    .textarea-custom, .textarea-custom:focus{
+        background-color: #2d2d39;
+        color: #e5e7eb;
+        border-bottom: 1px solid var(--color-bg-main);
+        border-radius: 0;
+    }
+
+    .my-btn{
+        padding: 6px 15px;
+        font-size: 0.9rem;
+    }
+
+    .comment-wrapper {
+        position: relative;
+    }
+
+    .send-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: transparent;
+        border: none;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
     }
 
     
@@ -42,14 +93,14 @@
         <div class="row">
             
             <!-- =============== main conversation starts =============== -->
-            <div class="col-md-9 gy-4 gx-5">
-                {% include 'base/room/main_room.html' %}
+            <div class="col-lg-8 gy-4 gx-5">
+                {% include 'base/room/room_contents.html' %}
             </div>
             <!-- =============== main conversation ends =============== -->
 
 
             <!-- =============== participants starts here =============== -->
-            <div class="col-md-3 gy-4 gx-5">
+            <div class="col-lg-4 gy-4 gx-5">
                 {% include 'base/room/participant_components.html' %}
             </div>
             <!-- =============== participants ends here =============== -->
