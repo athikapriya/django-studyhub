@@ -26,18 +26,18 @@ def loginPage(request):
 
         if not email or not password:
             messages.error(request, "Both fields are required", extra_tags="auth")
-            return render(request, 'base/login_form.html')
+            return render(request, 'base/authentication/login_form.html')
 
         if User.objects.filter(email=email).count() > 1:
             messages.error(request, "Multiple accounts found with this email", extra_tags="auth")
-            return render(request, 'base/login_form.html')
+            return render(request, 'base/authentication/login_form.html')
 
         try:
             user = User.objects.get(email=email)
             username = user.username
         except User.DoesNotExist:
             messages.error(request,  "User doesn't exist", extra_tags="auth")
-            return render(request, 'base/login_form.html')
+            return render(request, 'base/authentication/login_form.html')
 
         user = authenticate(request, username=username, password=password)
 
@@ -50,7 +50,7 @@ def loginPage(request):
     context = {
        
     }
-    return render(request, 'base/login_form.html', context)
+    return render(request, 'base/authentication/login_form.html', context)
 
 
 
@@ -81,7 +81,7 @@ def registerUser(request):
     context = {
         "form": form
     }
-    return render(request, 'base/register_form.html', context)
+    return render(request, 'base/authentication/register_form.html', context)
 
 
 
@@ -258,10 +258,9 @@ def updateMessage(request, pk):
         if body:
             message.body = body
             message.save()
-        return redirect("room", slug=message.room.slug)
 
-    context = {"message": message}
-    return render(request, "base/update_message.html", context)
+    return redirect("room", slug=message.room.slug)
+
 
 
 @login_required(login_url='login')
@@ -270,7 +269,5 @@ def deleteMessage(request, pk):
 
     if request.method == "POST":
         message.delete()
-        return redirect("room", slug=message.room.slug)
-
-    context = {"message": message}
-    return render(request, "base/update_message.html", context)
+    
+    return redirect("room", slug=message.room.slug)
