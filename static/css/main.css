@@ -147,33 +147,16 @@ h2{
     background-color: #474A63;
     color: #e5e7eb;
     border: 1px solid #374151;
+    font-size: 0.9rem;
 }
 
 .form-input-custom::placeholder {
-    color: #9ca3af;
-}
-
-/* ===== Topic select ===== */
-.form-select-custom {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-
-    background-color: #474A63;
-    color: #e5e7eb;
-    border: 1px solid #374151;
-
-    padding-right: 40px;
-
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e5e7eb'%3E%3Cpath d='M7 10l5 5 5-5'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 16px;
+    color: #9ca3af ;
+    font-size: 0.9rem;
 }
 
 /* ===== Focus state (all fields) ===== */
-.form-input-custom:focus,
-.form-select-custom:focus {
+.form-input-custom:focus {
     background-color: #474A63;
     color: #e5e7eb;
     border-color: var(--color-btn-secondary);

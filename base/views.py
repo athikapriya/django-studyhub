@@ -170,20 +170,28 @@ def browseTopics(request):
 # =============== Room create view =============== 
 @login_required(login_url='login')
 def createRoom(request):
+    topics = Topic.objects.all()
+
     if request.method == "POST":
-        print(request.POST)
-        form = RoomForm(request.POST)
-        if form.is_valid():
-            room = form.save(commit=False)
-            room.host = request.user 
-            room.save()
-            return redirect("homepage")
+        topic_name = request.POST.get("topic")
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+
+        room = Room(
+            host = request.user,
+            topic = topic,
+            name = request.POST.get("name"),
+            description = request.POST.get("description")
+        )
+        room.save()
+        return redirect("homepage")
+    
     else:
         form = RoomForm()
 
     context = {
         "form" : form,
-        "btn_text" : "Create Room"
+        "btn_text" : "Create Room",
+        "topics" : topics
     }
     return render(request, 'base/room_form.html', context)
 
@@ -194,20 +202,26 @@ def createRoom(request):
 def updateRoom(request, pk):
     room = get_object_or_404(Room, id=pk)
     form = RoomForm(instance=room)
+    topics = Topic.objects.all()
 
     if request.user != room.host:
         messages.error(request, "Sorry! You are not allowed to update this room.")
         return redirect("room", slug=room.slug)
 
-    if request.method == "POST":
-        form = RoomForm(request.POST, instance=room)
-        if form.is_valid():
-            form.save()
-            return redirect("room", slug=room.slug)
+    if request.method == 'POST':
+        topic_name = request.POST.get('topic')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+        room.name = request.POST.get('name')
+        room.topic = topic
+        room.description = request.POST.get('description')
+        room.save()
+        return redirect("room", slug=room.slug)
+    
     context = {
         "room" : room,
         "form" : form,
-        "btn_text" : "Update Room"
+        "btn_text" : "Update Room",
+        "topics" : topics
     }
     return render(request, 'base/room_form.html', context)
 

@@ -59,7 +59,7 @@ class RoomForm(ModelForm):
                 "class" : "form-control form-control-sm form-input-custom",
                 "placeholder" : "Ex: Mastering Python+Django"
             }),
-            "topic" : forms.Select(attrs={
+            "topic" : forms.TextInput(attrs={
                 "class" : "form-control form-control-sm form-select-custom"
             }),
             "description" : forms.Textarea(attrs={
