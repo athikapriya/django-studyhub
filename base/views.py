@@ -1,6 +1,6 @@
 # third-party imports
 from django.shortcuts import render, get_object_or_404, redirect
-from django.db.models import Q, Count
+from django.db.models import Q, Count, F
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -95,7 +95,10 @@ def homepage(request):
        Q(topic__name__icontains= q) |
        Q(name__icontains = q) |
        Q(description__icontains = q)
+    ).annotate(
+        participant_count = Count("participants", distinct=True)
     )
+
     room_count = rooms.count()
     room_message = Message.objects.filter(
         Q(room__topic__name__icontains=q)
@@ -121,7 +124,7 @@ def homepage(request):
 def room(request, slug):
     room = get_object_or_404(Room, slug=slug)
     room_messages = room.message_set.all()
-    participants = room.participants.all()
+    participants = room.participants.exclude(id=room.host.id)
     total_participant = participants.count()
 
     if request.method == "POST":
@@ -174,7 +177,13 @@ def browseTopics(request):
 def userProfile(request, username):
     user = get_object_or_404(User, username=username)
 
-    rooms = Room.objects.filter(host=user)
+    rooms = Room.objects.filter(host=user).annotate(
+        participant_count=Count(
+            'participants',
+            filter=~Q(participants=F('host')),
+            distinct=True
+        )
+    )   
     room_messages = Message.objects.filter(user=user)
 
     topics = Topic.objects.filter(
