@@ -1,0 +1,82 @@
+{% extends 'base/main.html' %}
+
+{% block css %}
+
+<style>
+
+    h3{
+        font-size: 0.95rem;
+        color : var(--color-text-secondary);
+    }
+
+    .room-name__container{
+        border-bottom: 1px solid var(--color-bg-surface);
+    }
+
+    .room-name{
+        color: var(--color-text-primary);
+        transition: var(--transition);
+        font-size: 1.25rem;
+    }
+
+    .room-name:hover{
+        color: var(--color-primary);
+    }
+
+    .topic-name{
+        font-size: 0.85rem;
+    }
+
+    .small-screen__activity{
+        display: none;
+    }
+
+    @media screen and (max-width: 992px) {
+        .activity-section{
+            display: none;
+        }
+
+        .small-screen__activity{
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .topic-section{
+            display: none;
+        }
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<main class="container">
+    <div class="row">
+
+
+        <!-- =============== topic components starts here =============== -->
+        <aside class="col-md-4 col-lg-3 g-4 topic-section">
+            {% include 'base/components/topic_components.html' %}
+            <div class="small-screen__activity">
+                {% include 'base/components/activity_components.html' %}
+            </div>
+        </aside>
+        <!-- =============== topic components ends here =============== -->
+
+        <!-- =============== profile contents starts here =============== -->
+        <section class="col-md-8 col-lg-6 g-4">
+            hello, john
+            {% include 'base/components/feed_components.html' %}
+        </section>
+        <!-- =============== profile contends ends here =============== -->
+
+        <!-- =============== activity components starts here =============== -->
+        <aside class="col-lg-3 g-4 activity-section">
+            {% include 'base/components/activity_components.html' %}
+        </aside>
+        <!-- =============== activity components ends here =============== -->
+
+    </div>
+</main>
+{% endblock %}

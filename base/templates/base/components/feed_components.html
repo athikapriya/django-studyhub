@@ -1,46 +1,6 @@
 {% block css %}
 <style>
 
-    h3{
-        font-size: 0.95rem;
-        color : var(--color-text-secondary);
-    }
-
-    .room-name__container{
-        border-bottom: 1px solid var(--color-bg-surface);
-    }
-
-    .room-name{
-        color: var(--color-text-primary);
-        transition: var(--transition);
-        font-size: 1.25rem;
-    }
-
-    .room-name:hover{
-        color: var(--color-primary);
-    }
-
-    .topic-name{
-        font-size: 0.85rem;
-    }
-
-    .tabs a{
-        font-size: 0.85rem;
-        border: 2px solid var(--color-btn-secondary);
-        display: inline-block;
-        padding: 5px 20px;
-        transition: var(--transition);
-    }
-
-    .tabs a:hover{
-        background-color: var(--color-btn-secondary);
-        color: var(--color-btn-primary);
-    }
-
-    .feed-components .small-screen-header{
-        display: none;
-    }
-
     .dropdown-menu{
         --bs-dropdown-min-width: 6rem;
         --bs-dropdown-bg: var(--color-text-primary);
@@ -61,73 +21,15 @@
 {% endblock %}
 
 
-<section class="feed-components">
-
-    <!-- =============== Mobile view: Feed with tabs for Topics and Activity starts =============== -->
-    <div class="small-screen-header">
-
-        <!-- search bar starts -->
-        <form  method="GET" action="{% url 'homepage' %}" role="search" class="d-flex align-items-center search-bar">
-            <div class="form-control form-control-sm d-flex align-items-center w-100">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 640 640"
-                    width="20"
-                    height="20"
-                    fill="currentColor"
-                    class=" ms-2 me-1 ">
-                    <title>Search</title>
-                    <path d="M480 272C480 317.9 465.1 360.3 440 394.7L566.6 521.4C579.1 533.9 579.1 554.2 566.6 566.7C554.1 579.2 533.8 579.2 521.3 566.7L394.7 440C360.3 465.1 317.9 480 272 480C157.1 480 64 386.9 64 272C64 157.1 157.1 64 272 64C386.9 64 480 157.1 480 272zM272 416C351.5 416 416 351.5 416 272C416 192.5 351.5 128 272 128C192.5 128 128 192.5 128 272C128 351.5 192.5 416 272 416z"/>
-                    </svg>
-                <input type="search" name="q"  placeholder="Search for rooms" aria-label="search" class="search-input">
-            </div>
-        </form>
-        <!-- search bar ends -->
-
-        <!-- topics and activity tab starts -->
-        <div class="d-flex align-items-center justify-content-center gap-3 my-4 tabs">
-            <a href="{% url 'browse-topics' %}" class="text-decoration-none color-primary fw-semibold rounded-5">Browse Topics</a>
-            <a href="" class="text-decoration-none color-primary fw-semibold rounded-5">Recent Activity</a>
-        </div>
-        <!-- topics and activity tab ends -->
-
-    </div>
-    <!-- =============== Mobile view: Feed with tabs for Topics and Activity ends =============== -->
-
-
-    <!-- =============== Feed header starts here =============== -->
-    <div class="d-flex justify-content-between pt-2">
-        <!-- available rooms starts -->
-        <div class="col-6">
-            <h2 class="text-uppercase mb-1 color-text-primary">Rooms</h2>
-            <h3>{{room_count}} Rooms available</h3>
-        </div>
-        <!-- available rooms ends -->
-
-        <!-- add room btn starts -->
-        <div class="col-6">
-            <div class="d-flex justify-content-end align-items-end">
-                <a href="{% url 'create-room' %}" class="d-flex justify-content-center align-items-center text-decoration-none my-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                        viewBox="0 0 640 640"
-                        width="18"
-                        height="18"
-                        class="me-2"
-                        fill="currentColor">
-                        <title>add</title>
-                        <path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z"/>
-                    </svg>
-                    Create Room
-                </a>
-            </div>
-        </div>
-        <!-- add room btn ends -->
-    </div>
-    <!-- =============== feed header ends here =============== -->
-
+<div class="feed-components">
 
     <!-- =============== main feed starts here =============== -->
     <div class="mt-3">
-        <h3 class="color-primary">All Rooms</h3>
+        {% if page == 'homepage' %}
+            <h3 class="color-primary">All Rooms</h3>
+        {% else %}
+            <h2 class="color-text-secondary text-uppercase ">Study rooms hosted by {{request.user}}</h2>
+        {% endif %}
 
         <!-- rooms -->
         {% for room in rooms %}
@@ -139,7 +41,7 @@
 
                         <!-- LEFT: host -->
                         <div class="small">
-                            <a href="" class="color-primary">
+                            <a href="" class="color-primary text-decoration-none">
                                 Host <span class="fw-semibold">@{{ room.host.username }}</span>
                             </a>
                         </div>
@@ -208,4 +110,4 @@
     </div>
     
     <!-- =============== main feed ends here =============== -->
-</section>
+</div>

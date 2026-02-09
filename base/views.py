@@ -87,6 +87,8 @@ def registerUser(request):
 
 # =============== homepage view =============== 
 def homepage(request):
+    page= "homepage"
+
     q = request.GET.get('q') or ""
 
     rooms = Room.objects.filter(
@@ -101,7 +103,7 @@ def homepage(request):
 
     topics = Topic.objects.annotate(
         room_count=Count("rooms")
-    )[:9]
+    )[:7]
     
     topic_count = Topic.objects.count()
     context = {
@@ -109,7 +111,8 @@ def homepage(request):
         "room_count" : room_count,
         "room_message" : room_message,
         "topics" : topics,
-        "topic_count" : topic_count
+        "topic_count" : topic_count,
+        "page" : page
     }
     return render(request, 'base/homepage.html', context)
 
@@ -164,6 +167,32 @@ def browseTopics(request):
         "topic_count": topic_count,
     }
     return render(request, "base/browse_topics.html", context)
+
+
+
+# =============== User profile view =============== 
+def userProfile(request, username):
+    user = get_object_or_404(User, username=username)
+
+    rooms = Room.objects.filter(host=user)
+    room_messages = Message.objects.filter(user=user)
+
+    topics = Topic.objects.filter(
+        rooms__host=user
+    ).annotate(
+        room_count=Count('rooms')
+    ).distinct()
+
+    topic_count = Room.objects.filter(host=user).count()
+
+    context = {
+        'user': user,
+        'rooms': rooms,
+        'room_messages': room_messages,
+        'topics': topics,
+        "topic_count" : topic_count
+    }
+    return render(request, 'base/user_profile.html', context)
 
 
 
