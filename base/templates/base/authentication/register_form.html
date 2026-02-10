@@ -28,24 +28,42 @@
                                 {% csrf_token %}
 
                                 <!-- =============== username field =============== -->
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <label for="name" class="form-label">Username</label>
                                     {{form.username}}
+
+                                    {% if form.username.errors %}
+                                        <div class="text-white small mt-1 text-end">
+                                            {{ form.username.errors.0 }}
+                                        </div>
+                                    {% endif %}
                                 </div>
                                 
                                 <!-- =============== email field =============== -->
-                                <div class="mb-4">
+                                <div class="mb-3">
                                     <label for="email" class="form-label">Email Address</label>
                                     {{form.email}}
+
+                                    {% if form.email.errors %}
+                                        <div class="text-white small mt-1 text-end">
+                                            {{ form.email.errors.0 }}
+                                        </div>
+                                    {% endif %}
                                 </div>
 
                                 <!-- =============== password1 field =============== -->
-                                <div class="mb-4 position-relative">
+                                <div class="mb-3 position-relative">
                                     <label for="password" class="form-label">Password</label>
                                     {{form.password1}}
                                     <span class="toggle-password">
                                         <i class="fa-solid fa-eye"></i>
                                     </span>
+
+                                    {% if form.password1.errors %}
+                                        <div class="text-white small mt-1 text-end">
+                                            {{ form.password1.errors.0 }}
+                                        </div>
+                                    {% endif %}
                                 </div>
 
                                 <!-- =============== password2 field =============== -->
@@ -55,15 +73,20 @@
                                     <span class="toggle-password">
                                         <i class="fa-solid fa-eye"></i>
                                     </span>
+                                    {% if form.password1.errors %}
+                                        <div class="text-white small mt-1 text-end">
+                                            {{ form.password1.errors.0 }}
+                                        </div>
+                                    {% endif %}
                                 </div>
 
 
                                 <!-- =============== error messages starts =============== -->
-                                <div class="text-center error-msg">
+                                <!-- <div class="text-center error-msg">
                                     {% for message in messages %}
                                         <p class="mb-2 text-center color-text-primary">{{message}}</p>
                                     {% endfor %}
-                                </div>
+                                </div> -->
                                 <!-- =============== error messages ends =============== -->
 
                                 

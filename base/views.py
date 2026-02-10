@@ -75,9 +75,6 @@ def registerUser(request):
             messages.success(request, "Account created successfully. Please log in.", extra_tags="auth")
             return redirect('login')  
 
-        else:
-            messages.error(request, "An error occurred during registration", extra_tags='auth')
-
     context = {
         "form": form
     }
