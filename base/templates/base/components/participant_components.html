@@ -8,11 +8,11 @@
     </div>
     <!-- card header ends -->
 
-        <!-- card body starts -->
+    <!-- card body starts -->
     <div class="card-body color-bg-main p-4">
         {% for user in participants %}
             <div>
-                <a href="" >@{{user}}</a>
+                <a href="{% url 'user-profile' user.username %}" >@{{user.username}}</a>
             </div>
         {% endfor %}
     </div>
