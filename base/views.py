@@ -12,9 +12,8 @@ from .models import *
 from .forms import RoomForm, CreateUserForm
 
 
-
-
-# =============== Login view =============== 
+# ============================== AUTH views starts here ============================== 
+# =============== Login view starts =============== 
 def loginPage(request):
 
     if request.user.is_authenticated:
@@ -51,17 +50,18 @@ def loginPage(request):
        
     }
     return render(request, 'base/authentication/login_form.html', context)
+# =============== Login view ends =============== 
 
 
 
-# =============== logout view =============== 
+# =============== logout view starts =============== 
 def logoutUser(request):
     logout(request)
     return redirect("login")
+# =============== logout view ends =============== 
 
 
-
-# =============== register view =============== 
+# =============== register view starts =============== 
 def registerUser(request):
     form = CreateUserForm()
 
@@ -82,10 +82,12 @@ def registerUser(request):
         "form": form
     }
     return render(request, 'base/authentication/register_form.html', context)
+# =============== register view ends =============== 
+# ============================== AUTH views ends here ============================== 
 
 
 
-# =============== homepage view =============== 
+# ============================== homepage view starts here ============================== 
 def homepage(request):
     page= "homepage"
 
@@ -118,9 +120,10 @@ def homepage(request):
         "page" : page
     }
     return render(request, 'base/homepage.html', context)
+# ============================== homepage view ends here ============================== 
 
 
-# =============== room view =============== 
+# ============================== room view starts here ============================== 
 def room(request, slug):
     room = get_object_or_404(Room, slug=slug)
     room_messages = room.message_set.all()
@@ -150,10 +153,94 @@ def room(request, slug):
         "total_participant" : total_participant
     }
     return render(request, 'base/room.html', context)
+# ============================== room view ends here ============================== 
+
+
+# ============================== Room CURD starts here ============================== 
+# =============== Room create view starts =============== 
+@login_required(login_url='login')
+def createRoom(request):
+    topics = Topic.objects.all()
+
+    if request.method == "POST":
+        topic_name = request.POST.get("topic")
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+
+        room = Room(
+            host = request.user,
+            topic = topic,
+            name = request.POST.get("name"),
+            description = request.POST.get("description")
+        )
+        room.save()
+        return redirect("homepage")
+    
+    else:
+        form = RoomForm()
+
+    context = {
+        "form" : form,
+        "btn_text" : "Create Room",
+        "topics" : topics
+    }
+    return render(request, 'base/room_form.html', context)
+# =============== Room update view ends =============== 
 
 
 
-# =============== browse topics view =============== 
+# =============== Room update view starts =============== 
+@login_required(login_url='login')
+def updateRoom(request, pk):
+    room = get_object_or_404(Room, id=pk)
+    form = RoomForm(instance=room)
+    topics = Topic.objects.all()
+
+    if request.user != room.host:
+        messages.error(request, "Sorry! You are not allowed to update this room.")
+        return redirect("room", slug=room.slug)
+
+    if request.method == 'POST':
+        topic_name = request.POST.get('topic')
+        topic, created = Topic.objects.get_or_create(name=topic_name)
+        room.name = request.POST.get('name')
+        room.topic = topic
+        room.description = request.POST.get('description')
+        room.save()
+        return redirect("room", slug=room.slug)
+    
+    context = {
+        "room" : room,
+        "form" : form,
+        "btn_text" : "Update Room",
+        "topics" : topics
+    }
+    return render(request, 'base/room_form.html', context)
+# =============== Room update view ends =============== 
+
+
+
+# =============== Room delete view starts =============== 
+@login_required(login_url='login')
+def deleteRoom(request, pk):
+    room = get_object_or_404(Room, id=pk)
+
+    if request.user != room.host:
+        messages.error(request, "Sorry! You are not allowed to delete this room.")
+        return redirect("room", slug=room.slug)
+
+    if request.method == "POST":
+        room.delete()
+        return redirect("homepage")
+    context = {
+        "room" : room
+    }
+    return render(request, "base/delete_room.html", context)
+# =============== Room delete view ends =============== 
+# ============================== Room CURD ends here ============================== 
+
+
+
+# ==============================browse topics view starts ============================== 
 def browseTopics(request):
     q = request.GET.get('q') or ""
 
@@ -170,10 +257,45 @@ def browseTopics(request):
         "topic_count": topic_count,
     }
     return render(request, "base/browse_topics.html", context)
+# ============================== browse topics view ends ============================== 
 
 
 
-# =============== User profile view =============== 
+# ============================== Message views starts here ============================== 
+# =============== update message view strts =============== 
+@login_required(login_url='login')
+def updateMessage(request, pk):
+    message = get_object_or_404(Message, id=pk)
+
+    if request.user != message.user:
+        messages.error(request, "You can't edit this message.")
+        return redirect("room", slug=message.room.slug)
+
+    if request.method == "POST":
+        body = request.POST.get("body")
+        if body:
+            message.body = body
+            message.save()
+
+    return redirect("room", slug=message.room.slug)
+# =============== update message view ends =============== 
+
+
+# =============== delete message view starts =============== 
+@login_required(login_url='login')
+def deleteMessage(request, pk):
+    message = get_object_or_404(Message, id=pk)
+
+    if request.method == "POST":
+        message.delete()
+    
+    return redirect("room", slug=message.room.slug)
+# =============== delete message view ends =============== 
+# ============================== Message views ends here ============================== 
+
+
+
+# ==============================User profile view starts ============================== 
 def userProfile(request, username):
     user = get_object_or_404(User, username=username)
 
@@ -202,110 +324,4 @@ def userProfile(request, username):
         "topic_count" : topic_count
     }
     return render(request, 'base/user_profile.html', context)
-
-
-
-# =============== Room create view =============== 
-@login_required(login_url='login')
-def createRoom(request):
-    topics = Topic.objects.all()
-
-    if request.method == "POST":
-        topic_name = request.POST.get("topic")
-        topic, created = Topic.objects.get_or_create(name=topic_name)
-
-        room = Room(
-            host = request.user,
-            topic = topic,
-            name = request.POST.get("name"),
-            description = request.POST.get("description")
-        )
-        room.save()
-        return redirect("homepage")
-    
-    else:
-        form = RoomForm()
-
-    context = {
-        "form" : form,
-        "btn_text" : "Create Room",
-        "topics" : topics
-    }
-    return render(request, 'base/room_form.html', context)
-
-
-
-# =============== Room update view =============== 
-@login_required(login_url='login')
-def updateRoom(request, pk):
-    room = get_object_or_404(Room, id=pk)
-    form = RoomForm(instance=room)
-    topics = Topic.objects.all()
-
-    if request.user != room.host:
-        messages.error(request, "Sorry! You are not allowed to update this room.")
-        return redirect("room", slug=room.slug)
-
-    if request.method == 'POST':
-        topic_name = request.POST.get('topic')
-        topic, created = Topic.objects.get_or_create(name=topic_name)
-        room.name = request.POST.get('name')
-        room.topic = topic
-        room.description = request.POST.get('description')
-        room.save()
-        return redirect("room", slug=room.slug)
-    
-    context = {
-        "room" : room,
-        "form" : form,
-        "btn_text" : "Update Room",
-        "topics" : topics
-    }
-    return render(request, 'base/room_form.html', context)
-
-
-
-# =============== Room delete view =============== 
-@login_required(login_url='login')
-def deleteRoom(request, pk):
-    room = get_object_or_404(Room, id=pk)
-
-    if request.user != room.host:
-        messages.error(request, "Sorry! You are not allowed to delete this room.")
-        return redirect("room", slug=room.slug)
-
-    if request.method == "POST":
-        room.delete()
-        return redirect("homepage")
-    context = {
-        "room" : room
-    }
-    return render(request, "base/delete_room.html", context)
-
-
-@login_required(login_url='login')
-def updateMessage(request, pk):
-    message = get_object_or_404(Message, id=pk)
-
-    if request.user != message.user:
-        messages.error(request, "You can't edit this message.")
-        return redirect("room", slug=message.room.slug)
-
-    if request.method == "POST":
-        body = request.POST.get("body")
-        if body:
-            message.body = body
-            message.save()
-
-    return redirect("room", slug=message.room.slug)
-
-
-
-@login_required(login_url='login')
-def deleteMessage(request, pk):
-    message = get_object_or_404(Message, id=pk)
-
-    if request.method == "POST":
-        message.delete()
-    
-    return redirect("room", slug=message.room.slug)
+# ============================== user profile view ends ============================== 
