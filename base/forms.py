@@ -2,11 +2,10 @@
 from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 # local app imports 
-from .models import Room
+from .models import Room, User
 
 
 
@@ -14,10 +13,14 @@ from .models import Room
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["username", "email", 'password1', "password2"]
+        fields = ["name", "username", "email", 'password1', "password2"]
 
 
         widgets = {
+            "name" : forms.TextInput(attrs={
+                "class" : "form-control form-control-sm form-input-custom",
+                "placeholder" : "e.g. john doe"
+            }),
             "username" : forms.TextInput(attrs={
                 "class" : "form-control form-control-sm form-input-custom",
                 "placeholder" : "e.g. john doe"

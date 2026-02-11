@@ -1,7 +1,6 @@
 # third-party imports
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q, Count, F
-from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -38,7 +37,7 @@ def loginPage(request):
             messages.error(request,  "User doesn't exist", extra_tags="auth")
             return render(request, 'base/authentication/login_form.html')
 
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
 
         if user is not None:
             login(request, user)

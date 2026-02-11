@@ -27,9 +27,21 @@
                         <form action="" method="POST" class="">
                                 {% csrf_token %}
 
+                                <!-- =============== name field =============== -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    {{form.name}}
+
+                                    {% if form.name.errors %}
+                                        <div class="text-white small mt-1 text-end">
+                                            {{ form.name.errors.0 }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
                                 <!-- =============== username field =============== -->
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Username</label>
+                                    <label for="username" class="form-label">Username</label>
                                     {{form.username}}
 
                                     {% if form.username.errors %}
