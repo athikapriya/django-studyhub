@@ -96,7 +96,7 @@ def homepage(request):
        Q(description__icontains = q)
     ).annotate(
         participant_count = Count("participants", distinct=True)
-    )
+    ).order_by("-updated")
 
     room_count = rooms.count()
     room_message = Message.objects.filter(
