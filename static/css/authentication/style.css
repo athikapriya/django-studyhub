@@ -1,10 +1,18 @@
 
+nav{
+    display: none !important;
+}
+
 .card-body{
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
 h2{
     font-size: 1.125rem;
+}
+
+.form-label{
+    font-size: 0.9rem;
 }
 
 .form-input-custom{
@@ -12,11 +20,11 @@ h2{
     border:1px solid var(--color-neutral-hover);
     border-radius: 3px;
     font-size: 0.9rem;
-    padding: 0.5rem;
+    padding: 0.4rem;
 }
 
 .form-input-custom::placeholder{
-    font-size: 0.88rem;
+    font-size: 0.85rem;
 }
 
 .form-input-custom:focus{
@@ -26,7 +34,7 @@ h2{
 
 .btn-container{
     margin: 1.25rem 0rem ;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .my-btn{
@@ -62,7 +70,16 @@ h2{
     left: 0;
 }
 
-.toggle-password {
+#register-page .toggle-password {
+    position: absolute;
+    top: 39px;
+    right: 20px;
+    cursor: pointer;
+    color: var(--color-neutral-hover);
+    z-index: 10;
+}
+
+#login-page .toggle-password{
     position: absolute;
     top: 38px;
     right: 12px;
@@ -71,16 +88,23 @@ h2{
     z-index: 10;
 }
 
+
 .toggle-password:hover {
     color: var(--color-neutral-hover);
 }
 
 .fa-eye, .fa-eye-slash{
-    font-size: 0.9rem;
+    font-size: 0.88rem;
 }
 
 .error-msg{
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+}
+
+@media screen and (max-width: 768px) {
+    h2{
+        font-size: 1.05rem;
+    }
 }
 
 @media screen and (max-width:576px) {

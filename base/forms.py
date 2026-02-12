@@ -19,15 +19,15 @@ class CreateUserForm(UserCreationForm):
         widgets = {
             "name" : forms.TextInput(attrs={
                 "class" : "form-control form-control-sm form-input-custom",
-                "placeholder" : "e.g. john doe"
+                "placeholder" : "Enter your full name"
             }),
             "username" : forms.TextInput(attrs={
                 "class" : "form-control form-control-sm form-input-custom",
-                "placeholder" : "e.g. john doe"
+                "placeholder" : "e.g. john_doe"
             }),
             "email" : forms.EmailInput(attrs={
                 "class" : "form-control form-control-sm form-input-custom",
-                "placeholder" : "e.g. johndoe@gmail.com"
+                "placeholder" : "e.g. john@example.com"
             })
         }
 

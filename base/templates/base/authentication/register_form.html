@@ -9,89 +9,100 @@
 
 <!-- =============== register section starts =============== -->
 
-<section id="register-page">
+<section id="register-page" class="d-flex justify-content-center align-items-center min-vh-100">
     <div class="container my-5">
         <div class="row">
-            <div class="px-4 px-sm-0 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto">
-                <div class="card  mb-3">
+            <div class="px-4 px-sm-0  col-sm-10 col-md-9 col-lg-7 col-xl-6 mx-auto">
+                <div class="card">
 
                     <!-- card header starts -->
                     <div class="card-header text-center color-text-primary color-bg-surface">
-                        Register
+                        Create Account
                     </div>
                     <!-- card header ends -->
 
                     <!-- card body starts -->
                     <div class="card-body color-bg-main">
+                         <h2 class="text-center color-primary">Join and find your perfect study partner</h2>
                         <!-- =============== form =============== -->
-                        <form action="" method="POST" class="">
+                        <form action="" method="POST" class="mt-3 mt-md-4">
                                 {% csrf_token %}
 
-                                <!-- =============== name field =============== -->
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
-                                    {{form.name}}
+                                <!-- =============== row for name starts =============== -->
+                                <div class="row">
+                                    <!-- =============== name field =============== -->
+                                    <div class="col-12 mb-3 mb-md-3">
+                                        <label for="name" class="form-label">Name</label>
+                                        {{form.name}}
 
-                                    {% if form.name.errors %}
-                                        <div class="text-white small mt-1 text-end">
-                                            {{ form.name.errors.0 }}
-                                        </div>
-                                    {% endif %}
+                                        {% if form.name.errors %}
+                                            <div class="text-white-50 small mt-1 fst-italic error-msg">
+                                                {{ form.name.errors.0 }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
+                                <!-- =============== row for name ends =============== -->
 
-                                <!-- =============== username field =============== -->
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    {{form.username}}
 
-                                    {% if form.username.errors %}
-                                        <div class="text-white small mt-1 text-end">
-                                            {{ form.username.errors.0 }}
-                                        </div>
-                                    {% endif %}
+                                <!-- =============== row for username and email field starts =============== -->
+                                <div class="row">
+                                    <!-- =============== username field =============== -->
+                                    <div class="col-md-6 mb-3 mb-md-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        {{form.username}}
+
+                                        {% if form.username.errors %}
+                                            <div class="text-white-50 small mt-1 fst-italic error-msg">
+                                                {{ form.username.errors.0 }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <!-- =============== email field =============== -->
+                                    <div class=" col-md-6 mb-3 mb-md-3">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        {{form.email}}
+
+                                        {% if form.email.errors %}
+                                            <div class="text-white-50 small mt-1 fst-italic error-msg">
+                                                {{ form.email.errors.0 }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
-                                
-                                <!-- =============== email field =============== -->
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email Address</label>
-                                    {{form.email}}
+                                <!-- =============== row for username and email field ends =============== -->
 
-                                    {% if form.email.errors %}
-                                        <div class="text-white small mt-1 text-end">
-                                            {{ form.email.errors.0 }}
-                                        </div>
-                                    {% endif %}
+                                <!-- =============== row for password1 and password2 starts =============== -->
+                                <div class="row">
+                                    <!-- =============== password1 field =============== -->
+                                    <div class="col-md-6 mb-3 mb-md-1 position-relative">
+                                        <label for="password" class="form-label">Password</label>
+                                        {{form.password1}}
+                                        <span class="toggle-password">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </span>
+
+                                        {% if form.password1.errors %}
+                                            <div class="text-white-50 small mt-1 fst-italic error-msg">
+                                                {{ form.password1.errors.0 }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <!-- =============== password2 field =============== -->
+                                    <div class="col-md-6 mb-1 mb-md-1 position-relative">
+                                        <label for="password" class="form-label">Confirm Password</label>
+                                        {{form.password2}}
+                                        <span class="toggle-password">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </span>
+                                        {% if form.password1.errors %}
+                                            <div class="text-white-50 small mt-1 fst-italic error-msg">
+                                                {{ form.password1.errors.0 }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
-
-                                <!-- =============== password1 field =============== -->
-                                <div class="mb-3 position-relative">
-                                    <label for="password" class="form-label">Password</label>
-                                    {{form.password1}}
-                                    <span class="toggle-password">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </span>
-
-                                    {% if form.password1.errors %}
-                                        <div class="text-white small mt-1 text-end">
-                                            {{ form.password1.errors.0 }}
-                                        </div>
-                                    {% endif %}
-                                </div>
-
-                                <!-- =============== password2 field =============== -->
-                                <div class="mb-3 position-relative">
-                                    <label for="password" class="form-label">Confirm Password</label>
-                                    {{form.password2}}
-                                    <span class="toggle-password">
-                                        <i class="fa-solid fa-eye"></i>
-                                    </span>
-                                    {% if form.password1.errors %}
-                                        <div class="text-white small mt-1 text-end">
-                                            {{ form.password1.errors.0 }}
-                                        </div>
-                                    {% endif %}
-                                </div>
-
+                                <!-- =============== row for password1 and password2 ends =============== -->
 
                                 <!-- =============== error messages starts =============== -->
                                 <!-- <div class="text-center error-msg">
