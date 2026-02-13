@@ -103,9 +103,12 @@ def homepage(request):
         room.extra_participants = len(uploaded_participants) - len(room.display_participants)
 
     room_count = rooms.count()
-    room_message = Message.objects.filter(
-        Q(room__topic__name__icontains=q)
-    )
+    if request.user.is_authenticated:
+        room_message = Message.objects.filter(
+            room__host=request.user  
+        ).select_related("room", "user").order_by("-created_at")
+    else:
+        room_message = Message.objects.none()
 
     topics = Topic.objects.annotate(
         room_count=Count("rooms")

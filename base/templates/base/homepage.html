@@ -66,7 +66,7 @@
         <aside class="col-md-4 col-lg-3 g-4 topic-section">
             {% include 'base/components/topic_components.html' %}
             <div class="small-screen__activity">
-                {% include 'base/components/activity_components.html' %}
+                {% include 'base/components/notification_components.html' %}
             </div>
         </aside>
         <!-- ========== homepage topic components starts here ========== -->
@@ -99,7 +99,7 @@
                 <!-- topics and activity tab starts -->
                 <div class="d-flex align-items-center justify-content-center gap-3 my-4 tabs">
                     <a href="{% url 'browse-topics' %}" class="text-decoration-none color-primary fw-semibold rounded-5">Browse Topics</a>
-                    <a href="" class="text-decoration-none color-primary fw-semibold rounded-5">Recent Activity</a>
+                    <a href="" class="text-decoration-none color-primary fw-semibold rounded-5">Notifications</a>
                 </div>
                 <!-- topics and activity tab ends -->
 
@@ -144,12 +144,12 @@
 
 
 
-        <!-- ========== activity starts here ========== -->
+        <!-- ========== notification starts here ========== -->
         <aside class="col-lg-3 g-4 activity-section">
             {% include 'base/components/host_components.html' %}
-            {% include 'base/components/activity_components.html' %}
+            {% include 'base/components/notification_components.html' %}
         </aside>
-        <!-- ========== activity ends here ========== -->
+        <!-- ========== notification ends here ========== -->
 
     </div>
 </main>

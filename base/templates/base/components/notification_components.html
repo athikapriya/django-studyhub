@@ -1,0 +1,84 @@
+{% load static %}
+
+{% block css %}
+<style>
+    .activity{
+        border: 0.093rem solid var(--color-neutral);
+        padding: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .activity:last-child{
+        margin-bottom: 0;
+    }
+
+    .activity-message{
+        background-color: #2d2d39;
+        padding: 0.30rem 0.75rem;
+    }
+
+    .message-user{
+        font-size: 0.85rem;
+    }
+
+    .message-user__time{
+        font-size: 0.8rem;
+    }
+</style>
+{% endblock %}
+
+<!-- =============== notification section starts here =============== -->
+<section id="activity-components">
+    <div class="card text-bg-secondary" >
+        <div class="card-header text-uppercase color-text-primary color-bg-surface">Notifications</div>
+        <div class="card-body color-bg-main">
+            {% for message in room_message %}
+
+            <div class="activity rounded-2">
+                <!-- =============== message info starts with action =============== -->
+                <div class="d-flex">
+
+                    <div class="col-11">
+                        <div class="d-flex gap-2">
+                            {% if message.user.avatar and message.user.avatar.name != "profile.svg" %}
+                                <div style="border: 2px solid var(--color-primary); border-radius: 50%; width: auto; height: 34px;">
+                                    <img src="{{ message.user.avatar.url }}" class="rounded-circle" width="30" height="30" style="object-fit: cover;" alt="Profile Picture">
+                                </div>
+                            {% else %}
+                                <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="30" height="30" alt="Default avatar">
+                            {% endif %}
+
+                            <div class="message-user">
+                                <a href="{% url 'user-profile' message.user.username %}" class="text-decoration-none color-primary ">@{{message.user.username|truncatechars:10}}</a>
+                                <span class="d-block color-text-secondary message-user__time">{{message.created_at|timesince}} ago</span>
+                                <span class=" color-text-tertiary">replied to post</span>
+                                <span class="d-block color-primary mt-1">" {{message.room}} "</span>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-1">
+                        {% if request.user == message.user or request.user == message.room.host %}
+                            <a href="{% url 'delete-message' message.id %}" class="text-decoration-none color-text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                </svg>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- =============== message info ends with action =============== -->
+
+                <!-- =============== message starts =============== -->
+                <div class="activity-message rounded-1 mt-2 color-text-tertiary">
+                    {{message}}
+                </div>
+                <!-- =============== message ends =============== -->
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- =============== notification section ends here =============== -->
