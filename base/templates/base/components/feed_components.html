@@ -40,7 +40,9 @@
         {% if page == 'homepage' %}
             <h3 class="color-primary">All Rooms</h3>
         {% else %}
-            <h2 class="color-text-secondary text-uppercase ">Study rooms hosted by {{request.user}}</h2>
+            {% if rooms %}
+            <h2 class="color-text-secondary text-uppercase user-rooms">Study rooms hosted by {{request.user.name}}</h2>
+            {% endif %}
         {% endif %}
 
         <!-- rooms -->
@@ -54,7 +56,7 @@
                         <!-- LEFT: host -->
                         <div class="small">
                             <a href="" class="color-primary text-decoration-none">
-                                Host <span class="fw-semibold">@{{ room.host.username }}</span>
+                                Host <span class="fw-semibold">@{{ room.host.username|slice:":7" }}</span>
                             </a>
                         </div>
 

@@ -115,10 +115,10 @@ nav .dropdown-divider {
                 <!-- Name + Username -->
                 <div class="me-2">
                     <div class="color-text-secondary text-start fw-semibold" style="font-size: 15px;">
-                        {{ request.user.name|default:request.user.username }}
+                        {{ request.user.name|default:request.user.username|truncatechars:8 }}
                     </div>
-                    <div class="color-primary" style="font-size: 14px;">
-                        @{{ request.user.username }}
+                    <div class="color-primary text-start" style="font-size: 14px;">
+                        @{{ request.user.username|truncatechars:9 }}
                     </div>
                 </div>
        

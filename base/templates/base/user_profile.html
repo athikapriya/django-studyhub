@@ -1,8 +1,10 @@
 {% extends 'base/main.html' %}
-
+{% load static %}
 {% block css %}
 
 <style>
+
+    
 
     h3{
         font-size: 0.95rem;
@@ -29,6 +31,35 @@
 
     .small-screen__activity{
         display: none;
+    }
+
+    .host-name{
+        font-size: 1.25rem;
+    }
+
+    .host-username{
+        font-size: 0.93rem;
+    }
+
+    .tabs a{
+        font-size: 0.9rem;
+        border: 2px solid var(--color-btn-secondary);
+        display: inline-block;
+        padding: 6px 22px;
+        transition: var(--transition);
+    }
+
+    .tabs a:hover{
+        background-color: var(--color-btn-secondary);
+        color: var(--color-btn-primary);
+    }
+
+    .user-bio h2, .user-rooms{
+        color: #696d97;
+    }
+
+    .user-bio p{
+        font-size: 0.95rem;
     }
 
     @media screen and (max-width: 992px) {
@@ -64,12 +95,53 @@
         </aside>
         <!-- =============== topic components ends here =============== -->
 
+
+
         <!-- =============== profile contents starts here =============== -->
         <section class="col-md-8 col-lg-6 g-4">
-            hello, john
+            
+            <!-- =============== host profile section starts =============== -->
+            <div class="host-profile">
+
+                <!-- =============== profile pic starts =============== -->
+                <div class="mx-auto" style="width: 88px; height: auto;">
+                    {% if request.user.avatar and request.user.avatar.name != "profile.svg" %}
+                    <div style="border: 2px solid var(--color-primary); border-radius: 50%; width: auto;" >
+                        <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="85" height="85" style="object-fit: cover;" alt="Profile Picture">
+                    </div>
+                    {% else %}
+                        <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="80" height="80" alt="Default avatar">
+                    {% endif %}
+                </div>
+                <!-- =============== profile pic ends =============== -->
+                
+                <!-- =============== name + username + user-edit starts =============== -->
+                <div class="mx-auto text-center mt-2">
+                    <h3 class="host-name color-text-primary pb-0 mb-1 lh-base">{{request.user.name|title}}</h3>
+                    <h4 class="host-username color-primary">@{{request.user.username}}</h4>
+                    <div class="tabs my-3 ">
+                        <a href="" class="text-decoration-none color-primary fw-semibold rounded-5">Edit Profile</a>
+                    </div>
+                </div>
+                <!-- =============== name + username + user-edit starts =============== -->
+
+                <!-- =============== user bio starts =============== -->
+                {% if request.user.bio %}
+                <div class="user-bio mb-4">
+                    <h2 class="fw-semibold text-uppercase ">About</h2>
+                    <p class="color-text-tertiary lg-base">{{request.user.bio}}</p>
+                </div>
+                {% endif %}
+                <!-- =============== user bio ends =============== -->
+
+            </div>
+            <!-- =============== host profile section ends =============== -->
+
             {% include 'base/components/feed_components.html' %}
         </section>
         <!-- =============== profile contends ends here =============== -->
+
+
 
         <!-- =============== activity components starts here =============== -->
         <aside class="col-lg-3 g-4 activity-section">
