@@ -1,6 +1,16 @@
+{% load static %}
 
+{% block css %}
+<style>
+    @media screen and (max-width:992px) {
+        .participant-section{
+            display: none;
+        }
+    }
+</style>
+{% endblock %}
 
-<div class="card mb-3">
+<div class="card mb-3 participant-section">
 
     <!-- card header starts -->
     <div class="card-header d-flex align-items-center gap-2 color-text-primary color-bg-surface">
@@ -9,12 +19,36 @@
     <!-- card header ends -->
 
     <!-- card body starts -->
-    <div class="card-body color-bg-main p-4">
+    <div class="card-body color-bg-main p-4 d-flex flex-column gap-4">
         {% for user in participants %}
-            <div>
-                <a href="{% url 'user-profile' user.username %}" >@{{user.username}}</a>
+
+            <div class="d-flex align-items-center ">
+
+                <!-- =============== participant image starts =============== -->
+                <div style="max-width: 43px;">
+                    {% if user.avatar and user.avatar.name != "profile.svg" %}
+                        <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
+                            <img src="{{ user.avatar.url }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;" alt="Profile Picture">
+                        </div>
+                    {% else %}
+                        <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="40" height="40" alt="Default avatar">
+                    {% endif %}
+                </div>
+                <!-- =============== participant image ends =============== -->
+
+                <!-- =============== participant username and name starts =============== -->
+                <div class="ms-2">
+                    <h6 class="color-text-secondary text-start mb-0" style="font-size: 15px;">
+                        {{ user.name|default:user.username|truncatechars:25 }}
+                    </h6>
+                    <a href="{% url 'user-profile' user.username %}" class="color-primary text-start text-decoration-none" style="font-size: 14px;">
+                        @{{ user.username}}
+                    </a>
+                </div>
+                <!-- =============== participant username and name ends =============== -->
             </div>
         {% endfor %}
+        
     </div>
     <!-- card body ends -->
 </div>
