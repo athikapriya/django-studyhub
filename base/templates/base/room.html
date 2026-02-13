@@ -19,16 +19,6 @@
         border-radius: 6px;
     }
 
-    .dropdown-menu{
-        --bs-dropdown-min-width: 6rem;
-        --bs-dropdown-bg: var(--color-text-primary);
-    }
-
-    .dropdown-item, .dropdown-item:hover, .dropdown-item:active, .dropdown-item:visited{
-        color: var(--color-btn-primary);
-        background-color: var(--color-text-primary) !important;
-    }
-
     .chat-room .comment {
         margin-top: 1rem; 
         margin-bottom: 1rem;
@@ -78,6 +68,40 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+    }
+
+        .room-dropdown {
+        background: rgba(45, 45, 57, 0.9);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.25);
+
+        min-width: 150px;
+        padding: 6px;
+
+        opacity: 0;
+        transform: translateY(10px); /* start below */
+        transition: opacity 0.25s ease, transform 0.25s ease;
+        transform-origin: bottom; /* grow from bottom like navbar */
+    }
+
+    .room-dropdown.show {
+        opacity: 1;
+        transform: translateY(0); /* slide up */
+    }
+
+    .room-dropdown .dropdown-item {
+        background: transparent;
+        color: var(--color-text-secondary);
+        border-radius: 8px;
+        padding: 8px 12px;
+        transition: all 0.25s ease;
+    }
+
+    .room-dropdown .dropdown-item:hover {
+        background: rgba(87, 187, 221, 0.15);
+        color: var(--color-primary);
     }
 
     
