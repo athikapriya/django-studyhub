@@ -90,12 +90,17 @@ def homepage(request):
     q = request.GET.get('q') or ""
 
     rooms = Room.objects.filter(
-       Q(topic__name__icontains= q) |
-       Q(name__icontains = q) |
-       Q(description__icontains = q)
+        Q(topic__name__icontains=q) |
+        Q(name__icontains=q) |
+        Q(description__icontains=q)
     ).annotate(
-        participant_count = Count("participants", distinct=True)
-    ).order_by("-updated")
+        participant_count=Count("participants", distinct=True)
+    ).select_related('host').prefetch_related('participants').order_by("-updated")
+
+    for room in rooms:
+        uploaded_participants = [p for p in room.participants.exclude(id=room.host.id)  if p.avatar and p.avatar.name != "profile.svg"]
+        room.display_participants = uploaded_participants[:7]
+        room.extra_participants = len(uploaded_participants) - len(room.display_participants)
 
     room_count = rooms.count()
     room_message = Message.objects.filter(
@@ -310,6 +315,11 @@ def userProfile(request, username):
     ).annotate(
         room_count=Count('rooms')
     ).distinct()
+
+    for room in rooms:
+        uploaded_participants = [p for p in room.participants.exclude(id=room.host.id) if p.avatar and p.avatar.name != "profile.svg"]
+        room.display_participants = uploaded_participants[:7]
+        room.extra_participants = len(uploaded_participants) - len(room.display_participants)
 
     topic_count = Room.objects.filter(host=user).count()
 
