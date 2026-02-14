@@ -99,7 +99,11 @@
                 <!-- topics and activity tab starts -->
                 <div class="d-flex align-items-center justify-content-center gap-3 my-4 tabs">
                     <a href="{% url 'browse-topics' %}" class="text-decoration-none color-primary fw-semibold rounded-5">Browse Topics</a>
-                    <a href="{% url 'activity' request.user.username %}" class="text-decoration-none color-primary fw-semibold rounded-5">Recent Activity</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'activity' request.user.username %}" class="text-decoration-none color-primary fw-semibold rounded-5">
+                            Recent Activity
+                        </a>
+                    {% endif %}
                 </div>
                 <!-- topics and activity tab ends -->
 

@@ -368,3 +368,25 @@ def user_activity(request, username):
     }
     return render(request, "base/user_activity.html", context)
 # ============================== activity view starts here ============================== 
+
+
+# ============================== notofication view starts here ============================== 
+@login_required(login_url="login")
+def user_notifications(request, username):
+    user = get_object_or_404(User, username=username)
+    
+    if request.user == user:
+        notifications = Message.objects.filter(
+            Q(room__host=user) | Q(room__participants=user)
+        ).exclude(user=user)  
+        notifications = notifications.select_related("room", "user").order_by("-created_at")
+    else:
+        notifications = Message.objects.none()
+
+    context = {
+        "notifications": notifications,
+        "user": user
+    }
+
+    return render(request, "base/user_notifications.html", context)
+# ============================== notofication view ends here ============================== 

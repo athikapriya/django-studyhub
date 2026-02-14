@@ -30,5 +30,9 @@ urlpatterns = [
 
     # =============== User Profile =============== 
     path("<str:username>/", views.userProfile, name="user-profile"),
+
+    # =============== Activities and Notifications =============== 
     path("<str:username>/activity/", views.user_activity, name="activity"),
+    path("<str:username>/notification/", views.user_notifications, name="notification"),
+
 ]
