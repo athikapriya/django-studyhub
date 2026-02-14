@@ -30,4 +30,5 @@ urlpatterns = [
 
     # =============== User Profile =============== 
     path("<str:username>/", views.userProfile, name="user-profile"),
+    path("<str:username>/activity/", views.user_activity, name="activity"),
 ]

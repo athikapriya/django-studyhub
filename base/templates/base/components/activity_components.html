@@ -35,13 +35,8 @@
 {% if user_activity %}
 <section id="activity-components">
     <div class="card text-bg-secondary" >
-        <div class="card-header text-uppercase color-text-primary color-bg-surface d-flex justify-content-between align-items-center">
-            <span>Activity</span>
-            <a href="" class="text-decoration-none color-text-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-                </svg>
-            </a>
+        <div class="card-header text-uppercase color-text-primary color-bg-surface">
+            Recent Activity
         </div>
         <div class="card-body color-bg-main">
             {% for message in user_activity %}

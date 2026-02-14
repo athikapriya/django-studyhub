@@ -348,3 +348,23 @@ def userProfile(request, username):
     }
     return render(request, 'base/user_profile.html', context)
 # ============================== user profile view ends ============================== 
+
+
+# ============================== activity view starts here ============================== 
+@login_required(login_url="login")
+def user_activity(request, username):
+    user = get_object_or_404(User, username=username)
+    
+    if request.user != user:
+        return redirect('home')  
+
+    user_activity = Message.objects.filter(
+        user=user
+    ).select_related("room", "user").order_by("-created_at")
+
+    context = {
+        "user_activity": user_activity,
+        "user": user
+    }
+    return render(request, "base/user_activity.html", context)
+# ============================== activity view starts here ============================== 
