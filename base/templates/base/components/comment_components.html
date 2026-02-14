@@ -95,12 +95,16 @@
                     </li>
 
                     <li>
-                        <button class="dropdown-item d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#deleteMessage{{ message.id }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill me-2" viewBox="0 0 16 16">
-                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                            </svg>
-                            Remove
-                        </button>
+                        <form method="POST" action="{% url 'delete-message' message.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button type="submit" class="dropdown-item  d-flex align-items-center color-text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill me-2 " viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                                </svg>
+                                Remove
+                            </button>
+                        </form>
                     </li>
 
                 </ul>
@@ -112,15 +116,9 @@
             {% include 'base/components/update_message.html' %}
             <!-- =============== update offcanvas ends here =============== -->
 
-
-
-            <!-- =============== delete offcanvas starts here =============== -->
-            {% include 'base/components/delete_message.html' %}
-            <!-- =============== delete offcanvas ends here =============== -->
             {% endif %}
             
         </div>
-
 
         <p class="mt-2 mb-0 pb-0 color-text-tertiary chat-message">{{message.body}}</p>
     </div>

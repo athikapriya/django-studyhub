@@ -290,10 +290,16 @@ def updateMessage(request, pk):
 def deleteMessage(request, pk):
     message = get_object_or_404(Message, id=pk)
 
-    if request.method == "POST":
+    if request.user == message.user or request.user == message.room.host:
         message.delete()
-    
-    return redirect("room", slug=message.room.slug)
+
+    next_url = request.POST.get('next')
+
+    if next_url:
+        return redirect(next_url)
+
+    return redirect('home')
+
 # =============== delete message view ends =============== 
 # ============================== Message views ends here ============================== 
 
