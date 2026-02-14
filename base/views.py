@@ -103,12 +103,14 @@ def homepage(request):
         room.extra_participants = len(uploaded_participants) - len(room.display_participants)
 
     room_count = rooms.count()
+
+    # for activity
     if request.user.is_authenticated:
-        room_message = Message.objects.filter(
-            room__host=request.user  
-        ).select_related("room", "user").order_by("-created_at")
+        user_activity = Message.objects.filter(
+            user=request.user
+        ).select_related("room").order_by("-created_at")[:5]
     else:
-        room_message = Message.objects.none()
+        user_activity = Message.objects.none()
 
     topics = Topic.objects.annotate(
         room_count=Count("rooms")
@@ -118,10 +120,10 @@ def homepage(request):
     context = {
         "rooms" : rooms,
         "room_count" : room_count,
-        "room_message" : room_message,
         "topics" : topics,
         "topic_count" : topic_count,
-        "page" : page
+        "page" : page,
+        "user_activity": user_activity
     }
     return render(request, 'base/homepage.html', context)
 # ============================== homepage view ends here ============================== 
@@ -317,7 +319,12 @@ def userProfile(request, username):
             distinct=True
         )
     )   
-    room_messages = Message.objects.filter(user=user)
+
+    # activity
+    user_activity = Message.objects.filter(
+        user=user
+    ).select_related("room").order_by("-created_at")[:5]
+
 
     topics = Topic.objects.filter(
         rooms__host=user
@@ -335,9 +342,9 @@ def userProfile(request, username):
     context = {
         'user': user,
         'rooms': rooms,
-        'room_messages': room_messages,
         'topics': topics,
-        "topic_count" : topic_count
+        "topic_count" : topic_count,
+        "user_activity": user_activity,
     }
     return render(request, 'base/user_profile.html', context)
 # ============================== user profile view ends ============================== 
