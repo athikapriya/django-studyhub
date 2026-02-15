@@ -48,6 +48,47 @@
         color: var(--color-text-primary);
         background-color: var(--color-btn-secondary);
     }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 16.5px;
+    }
+
+    .switch input {
+        display:none;
+    }
+
+    .slider {
+        position: relative;
+        display: inline-block;
+        width: 34px;
+        height: 15px;
+        border-radius: 16.5px; 
+        background-color: #ccc;
+        transition: 0.4s;
+    }
+
+    .slider:before {
+        content: "";
+        position: absolute;
+        height: 12px;
+        width: 12px;
+        left: 3px;  
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(16px); 
+    }
+
+    input:checked + .slider {
+    background-color: #28a745;
+    }
 </style>
 {% endblock %}
 
@@ -129,6 +170,14 @@
                                         {{ error }}
                                     </div>
                                 {% endfor %}
+                            </div>
+
+                            <div class="mb-3 d-flex align-items-center gap-2">
+                                <label class="form-label mb-0">Active Now</label>
+                                <label class="switch mb-0">
+                                    <input type="checkbox" name="is_online" id="id_is_online" {% if user.is_online %}checked{% endif %}>
+                                    <span class="slider round"></span>
+                                </label>
                             </div>
 
                             <button type="submit" class="btn w-100 mt-2 update-btn">Update Profile</button>

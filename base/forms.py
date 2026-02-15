@@ -61,7 +61,7 @@ class CreateUserForm(UserCreationForm):
 class EditUserForm(ModelForm):
     class Meta:
         model = User
-        fields = ["name", "username", 'bio', 'avatar']
+        fields = ["name", "username", 'bio', 'avatar', "is_online"]
 
         widgets = {
             "name" : forms.TextInput(attrs={
@@ -77,7 +77,10 @@ class EditUserForm(ModelForm):
             }),
             'avatar': forms.FileInput(attrs=
                 {'style': 'display:none;'
-            })
+            }),
+            "is_online" : forms.CheckboxInput(attrs={
+                "class" : "form-check-input"
+            }),
         }
 
     def clean_username(self):

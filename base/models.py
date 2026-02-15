@@ -20,6 +20,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True, null=True)
     bio = models.TextField(null=True)
 
+    is_online = models.BooleanField(default=True)
+
     avatar = models.ImageField(null=True, blank=True, upload_to="avatar/",  default="profile.svg")
 
     USERNAME_FIELD = "email"

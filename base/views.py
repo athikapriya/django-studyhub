@@ -350,13 +350,45 @@ def userProfile(request, username):
 # ============================== user profile view ends ============================== 
 
 
+# ============================== user profile settings view ends here ============================== 
+@login_required(login_url="login")
+def user_edit(request, username):
+    user = get_object_or_404(User, username=username)
+
+    if request.user != user:
+        messages.error(request, "You are not allowed to edit this page.")
+        return redirect("user-profile", username=user.username)
+
+    if request.method == "POST":
+        form = EditUserForm(request.POST, request.FILES, instance=user)
+
+        if form.is_valid():
+
+            if request.POST.get("remove_avatar") == "true":
+                if user.avatar:
+                    user.avatar.delete(save=False)
+                user.avatar = None
+
+            form.save()
+            return redirect("user-profile", username=user.username)
+    else:
+        form = EditUserForm(instance=user)
+
+    context = {
+        "form": form,
+        "user": user
+    }
+    return render(request, "base/user_edit.html", context)
+# ============================== user profile settings view ends here ============================== 
+
+
 # ============================== activity view starts here ============================== 
 @login_required(login_url="login")
 def user_activity(request, username):
     user = get_object_or_404(User, username=username)
     
     if request.user != user:
-        messages.error(request, "You are not allowed to access this profile.")
+        messages.error(request, "You are not allowed to access this page.")
         return redirect('homepage')  
 
     user_activity = Message.objects.filter(
@@ -377,7 +409,7 @@ def user_notifications(request, username):
     user = get_object_or_404(User, username=username)
 
     if request.user != user:
-        messages.error(request, "You are not allowed to access this profile.")
+        messages.error(request, "You are not allowed to access this page.")
         return redirect('homepage') 
     
     if request.user == user:
@@ -395,36 +427,3 @@ def user_notifications(request, username):
 
     return render(request, "base/user_notifications.html", context)
 # ============================== notofication view ends here ============================== 
-
-
-# ============================== user profile settings view ends here ============================== 
-@login_required(login_url="login")
-def user_edit(request, username):
-    user = get_object_or_404(User, username=username)
-
-    if request.user != user:
-        messages.error(request, "You are not allowed to edit this profile.")
-        return redirect("user-profile", username=user.username)
-
-    if request.method == "POST":
-        form = EditUserForm(request.POST, request.FILES, instance=user)
-
-        if form.is_valid():
-
-            if request.POST.get("remove_avatar") == "true":
-                if user.avatar:
-                    user.avatar.delete(save=False)
-                user.avatar = None
-
-            form.save()
-            messages.success(request, "Profile updated successfully!")
-            return redirect("user-profile", username=user.username)
-    else:
-        form = EditUserForm(instance=user)
-
-    context = {
-        "form": form,
-        "user": user
-    }
-    return render(request, "base/user_edit.html", context)
-# ============================== user profile settings view ends here ============================== 
