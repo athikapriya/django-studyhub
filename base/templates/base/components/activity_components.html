@@ -66,7 +66,7 @@
                                 <a href="{% url 'user-profile' message.user.username %}" class="text-decoration-none color-primary ">@{{message.user.username|truncatechars:10}}</a>
                                 <span class="d-block color-text-secondary message-user__time">{{message.created_at|timesince}} ago</span>
                                 <span class=" color-text-tertiary">replied to post</span>
-                                <span class="d-block color-primary mt-1">" {{message.room}} "</span>
+                                <a href="{% url 'room' message.room.slug %}" class="d-block color-primary mt-1 text-decoration-none">" {{message.room}} "</a>
                             </div>
                         </div>
                         
