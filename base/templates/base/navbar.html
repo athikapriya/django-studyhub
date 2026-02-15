@@ -112,14 +112,19 @@ nav .dropdown-menu {
                 <button class="d-flex align-items-center dropdown-toggle cursor-pointer border-0 bg-transparent" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" style="cursor:pointer;">
 
                     <!-- Profile Image -->
-                    <div class="me-2">
+                    <div class="me-2" style="position: relative; display: inline-block;">
                         {% if request.user.avatar and request.user.avatar.name != "profile.svg" %}
                             <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
-                                <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;" alt="Profile Picture">
+                                <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;" alt="{{ request.user.username }}">
                             </div>
                         {% else %}
                             <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="40" height="40" alt="Default avatar">
                         {% endif %}
+
+                        <!-- active dot starts -->
+                        <span style=" position: absolute; bottom: 2px; right: 1px; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; background-color: {% if request.user.is_online %}#28a745{% else %}#6c757d{% endif %};">
+                        </span>
+                        <!-- active dot ends -->
                     </div>
 
                     <!-- Name + Username -->
@@ -156,6 +161,15 @@ nav .dropdown-menu {
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
                             </svg>
                             Activity
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center " href="{% url 'user-edit' request.user.username %}" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill me-2" viewBox="0 0 16 16">
+                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"/>
+                            </svg>
+                            Edit Profile
                         </a>
                     </li>
 

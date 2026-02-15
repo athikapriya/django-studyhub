@@ -26,13 +26,20 @@
 
                 <!-- =============== participant image starts =============== -->
                 <div style="max-width: 43px;">
-                    {% if user.avatar and user.avatar.name != "profile.svg" %}
-                        <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
-                            <img src="{{ user.avatar.url }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;" alt="Profile Picture">
-                        </div>
-                    {% else %}
-                        <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="40" height="40" alt="Default avatar">
-                    {% endif %}
+                    <div class="" style="position: relative; display: inline-block; width: 40x; height: 40px;">
+                        {% if request.user.avatar and request.user.avatar.name != "profile.svg" %}
+                            <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
+                                <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;" alt="{{request.user.username}}">
+                            </div>
+                        {% else %}
+                            <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="40" height="40" alt="Default avatar">
+                        {% endif %}
+
+                        <!-- active dot starts -->
+                        <span style=" position: absolute; bottom: 0px; right: 2px; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; background-color: {% if request.user.is_online %}#28a745{% else %}#6c757d{% endif %};">
+                        </span>
+                        <!-- active dot ends -->
+                    </div>
                 </div>
                 <!-- =============== participant image ends =============== -->
 

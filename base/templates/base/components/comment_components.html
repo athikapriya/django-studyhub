@@ -52,13 +52,20 @@
             <div class="d-flex gap-2 gap-md-4 align-items-md-center comment-header">
 
                 <div class="d-flex align-items-center gap-2">
-                    {% if message.user.avatar and message.user.avatar.name != "profile.svg" %}
-                        <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
-                            <img src="{{ message.user.avatar.url }}" class="rounded-circle" width="30" height="30" style="object-fit: cover;" alt="Profile Picture">
-                        </div>
-                    {% else %}
-                        <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="30" height="30" alt="Default avatar">
-                    {% endif %}
+                    <div class="" style="position: relative; display: inline-block; width: 35x; height: 35px;">
+                        {% if request.user.avatar and request.user.avatar.name != "profile.svg" %}
+                            <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
+                                <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="35" height="35" style="object-fit: cover;" alt="{{ request.user.username }}">
+                            </div>
+                        {% else %}
+                            <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="35" height="35" alt="Default avatar">
+                        {% endif %}
+
+                        <!-- active dot starts -->
+                        <span style=" position: absolute; bottom: 0px; right: 2px; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; background-color: {% if request.user.is_online %}#28a745{% else %}#6c757d{% endif %};">
+                        </span>
+                        <!-- active dot ends -->
+                    </div>
 
                     <div class="">
                         <a href="{% url 'user-profile' message.user.username %}" class="text-decoration-none color-primary message-sender">@{{message.user.name|truncatechars:12}}</a>
