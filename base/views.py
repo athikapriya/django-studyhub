@@ -321,9 +321,12 @@ def userProfile(request, username):
     )   
 
     # activity
-    user_activity = Message.objects.filter(
-        user=user
-    ).select_related("room").order_by("-created_at")[:5]
+    if request.user == user:
+        user_activity = Message.objects.filter(
+            user=user
+        ).select_related("room").order_by("-created_at")[:5]
+    else:
+        user_activity = None
 
 
     topics = Topic.objects.filter(
