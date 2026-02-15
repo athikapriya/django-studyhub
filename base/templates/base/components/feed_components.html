@@ -104,7 +104,7 @@
             <h3 class="color-primary">All Rooms</h3>
         {% else %}
             {% if rooms %}
-            <h2 class="color-text-secondary text-uppercase user-rooms">Study rooms hosted by {{request.user.name}}</h2>
+            <h2 class="color-text-secondary text-uppercase user-rooms">Study rooms hosted by {{profile_user.name}}</h2>
             {% endif %}
         {% endif %}
 

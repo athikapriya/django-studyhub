@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 # local app imports
 from .models import *
-from .forms import RoomForm, CreateUserForm
+from .forms import RoomForm, CreateUserForm, EditUserForm
 
 
 # ============================== AUTH views starts here ============================== 
@@ -340,7 +340,7 @@ def userProfile(request, username):
     topic_count = Room.objects.filter(host=user).count()
 
     context = {
-        'user': user,
+        'profile_user': user,
         'rooms': rooms,
         'topics': topics,
         "topic_count" : topic_count,
@@ -356,7 +356,8 @@ def user_activity(request, username):
     user = get_object_or_404(User, username=username)
     
     if request.user != user:
-        return redirect('home')  
+        messages.error(request, "You are not allowed to access this profile.")
+        return redirect('homepage')  
 
     user_activity = Message.objects.filter(
         user=user
@@ -374,6 +375,10 @@ def user_activity(request, username):
 @login_required(login_url="login")
 def user_notifications(request, username):
     user = get_object_or_404(User, username=username)
+
+    if request.user != user:
+        messages.error(request, "You are not allowed to access this profile.")
+        return redirect('homepage') 
     
     if request.user == user:
         notifications = Message.objects.filter(
@@ -390,3 +395,36 @@ def user_notifications(request, username):
 
     return render(request, "base/user_notifications.html", context)
 # ============================== notofication view ends here ============================== 
+
+
+# ============================== user profile settings view ends here ============================== 
+@login_required(login_url="login")
+def user_edit(request, username):
+    user = get_object_or_404(User, username=username)
+
+    if request.user != user:
+        messages.error(request, "You are not allowed to edit this profile.")
+        return redirect("user-profile", username=user.username)
+
+    if request.method == "POST":
+        form = EditUserForm(request.POST, request.FILES, instance=user)
+
+        if form.is_valid():
+
+            if request.POST.get("remove_avatar") == "true":
+                if user.avatar:
+                    user.avatar.delete(save=False)
+                user.avatar = None
+
+            form.save()
+            messages.success(request, "Profile updated successfully!")
+            return redirect("user-profile", username=user.username)
+    else:
+        form = EditUserForm(instance=user)
+
+    context = {
+        "form": form,
+        "user": user
+    }
+    return render(request, "base/user_edit.html", context)
+# ============================== user profile settings view ends here ============================== 

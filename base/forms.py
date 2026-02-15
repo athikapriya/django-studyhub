@@ -53,6 +53,41 @@ class CreateUserForm(UserCreationForm):
             )
 
         return email
+    
+
+
+
+# =============== Edit User Form =============== 
+class EditUserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ["name", "username", 'bio', 'avatar']
+
+        widgets = {
+            "name" : forms.TextInput(attrs={
+                "class" : "form-control form-control-sm form-input-custom"
+            }),
+            "username": forms.TextInput(attrs={
+                "class": "form-control form-control-sm form-input-custom",
+            }),
+            "bio": forms.Textarea(attrs={
+                "class": "form-control form-control-sm form-input-custom",
+                "rows": 4,
+                "style": "resize:none;"
+            }),
+            'avatar': forms.FileInput(attrs=
+                {'style': 'display:none;'
+            })
+        }
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username").lower()
+
+        if User.objects.exclude(pk=self.instance.pk).filter(username=username).exists():
+            raise ValidationError("This username is already taken.")
+
+        return username
+
 
 
 # =============== room form =============== 

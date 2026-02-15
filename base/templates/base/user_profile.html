@@ -102,9 +102,9 @@
 
                 <!-- =============== profile pic starts =============== -->
                 <div class="mx-auto" style="width: 88px; height: auto;">
-                    {% if request.user.avatar and request.user.avatar.name != "profile.svg" %}
+                    {% if profile_user.avatar and profile_user.avatar.name != "profile.svg" %}
                     <div style="border: 2px solid var(--color-primary); border-radius: 50%; width: auto;" >
-                        <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="85" height="85" style="object-fit: cover;" alt="Profile Picture">
+                        <img src="{{ profile_user.avatar.url }}" class="rounded-circle" width="85" height="85" style="object-fit: cover;" alt="Profile Picture">
                     </div>
                     {% else %}
                         <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="80" height="80" alt="Default avatar">
@@ -114,19 +114,23 @@
                 
                 <!-- =============== name + username + user-edit starts =============== -->
                 <div class="mx-auto text-center mt-2">
-                    <h3 class="host-name color-text-primary pb-0 mb-1 lh-base">{{request.user.name|title}}</h3>
-                    <h4 class="host-username color-primary">@{{request.user.username}}</h4>
-                    <div class="tabs my-3 ">
-                        <a href="" class="text-decoration-none color-primary fw-semibold rounded-5">Edit Profile</a>
-                    </div>
+                    <h3 class="host-name color-text-primary pb-0 mb-1 lh-base">{{profile_user.name|title}}</h3>
+                    <h4 class="host-username color-primary mb-3">@{{profile_user.username}}</h4>
+
+                    {% if request.user == profile_user %}
+                        <div class="tabs mb-3 ">
+                            <a href="{% url 'user-edit' profile_user.username %}" class="text-decoration-none color-primary fw-semibold rounded-5">Edit Profile</a>
+                        </div>
+                    {% endif %}
+
                 </div>
                 <!-- =============== name + username + user-edit starts =============== -->
 
                 <!-- =============== user bio starts =============== -->
-                {% if request.user.bio %}
+                {% if profile_user.bio %}
                 <div class="user-bio mb-4">
                     <h2 class="fw-semibold text-uppercase ">About</h2>
-                    <p class="color-text-tertiary lg-base">{{request.user.bio}}</p>
+                    <p class="color-text-tertiary lg-base">{{profile_user.bio}}</p>
                 </div>
                 {% endif %}
                 <!-- =============== user bio ends =============== -->
