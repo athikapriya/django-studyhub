@@ -32,7 +32,7 @@ urlpatterns = [
     path("<str:username>/", views.userProfile, name="user-profile"),
 
     # =============== Profile edit =============== 
-    path("<str:username>/edit/", views.user_edit, name="user-edit"),
+    path("<str:username>/settings/update-profile/", views.user_edit, name="user-edit"),
 
     # =============== Activities + Notifications =============== 
     path("<str:username>/activity/", views.user_activity, name="activity"),

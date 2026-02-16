@@ -1,0 +1,199 @@
+
+nav{
+    display: none !important;
+}
+
+.settings-sidebar{
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.settings-main{
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding: 1.75rem ;
+}
+
+.account-settings a{
+    text-decoration: none;
+}
+
+/* user edit starts */
+#avatarPreview {
+    border: 2px solid #dee2e6;
+    transition: 0.3s;
+    display: block;
+}
+
+#avatarPreview:hover {
+    opacity: 0.8;
+}
+
+.camera-overlay {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.6);
+    position: absolute;
+    bottom: 7px;
+    right: 7px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.camera-overlay:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+#removePhotoBtn {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-btn-primary);
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.update-btn{
+    background-color: var(--color-primary);
+    color: var(--color-btn-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.update-btn:hover, #removePhotoBtn:hover{
+    color: var(--color-text-primary);
+    background-color: var(--color-btn-secondary);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 16.5px;
+}
+
+.switch input {
+    display:none;
+}
+
+.slider {
+    position: relative;
+    display: inline-block;
+    width: 33px;
+    height: 14.5px;
+    border-radius: 16.5px; 
+    background-color: #8e8e8e;
+    transition: 0.4s;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 11px;
+    width: 11px;
+    left: 3px;  
+    bottom: 2px;
+    background-color: #fff;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider:before {
+    transform: translateX(16px); 
+}
+
+input:checked + .slider {
+    background-color: #28a745;
+}
+/* user edit ends */
+
+.settings-header{
+    padding: 1.7rem 1.35rem 0rem;
+}
+
+.settings-links{
+    padding: 0rem 1.2rem 0rem ;
+}
+
+.setting-link{
+    background: transparent;
+    color: var(--color-text-tertiary);
+    border-radius: 8px;
+    padding: 5px 12px;
+    transition: all 0.25s ease;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.setting-link:hover{
+    background: rgba(87, 187, 221, 0.15);
+    color: var(--color-primary);
+}
+
+.setting-link.active{
+    background: rgba(87, 187, 221, 0.15);
+    color: var(--color-primary);
+}
+
+.account-settings h5{
+    font-size: 1rem;
+}
+
+.account-settings form{
+    margin-top: 1rem;
+}
+
+.setting-link svg {
+    flex-shrink: 0;  
+    width: 18px;
+    height: 18px;
+}
+
+/* responsiveness */
+
+@media (max-width: 767px) {
+
+    .settings-header {
+        text-align: center;  
+        padding-top: 1rem;
+    }
+
+    .settings-header a {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;     
+        border-radius: 50%;
+    }
+
+    .settings-links li {
+        flex: 1;
+        text-align: center;
+    }
+
+    .setting-link {
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .setting-link span {
+        display: none;
+    }
+
+    .setting-link.active {
+        background: rgba(87, 187, 221, 0.15);
+    }
+}

@@ -72,7 +72,7 @@ class EditUserForm(ModelForm):
             }),
             "bio": forms.Textarea(attrs={
                 "class": "form-control form-control-sm form-input-custom",
-                "rows": 4,
+                "rows": 3,
                 "style": "resize:none;"
             }),
             'avatar': forms.FileInput(attrs=

@@ -381,7 +381,7 @@ def user_edit(request, username):
         "form": form,
         "user": user
     }
-    return render(request, "base/user_edit.html", context)
+    return render(request, "users/user_edit.html", context)
 # ============================== user profile settings view ends here ============================== 
 
 

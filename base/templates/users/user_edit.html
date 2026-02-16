@@ -1,0 +1,167 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/users/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="account-settings">
+    <div class="container">
+        <div class="row my-5">
+            <div class="col-lg-9 col-xl-7 mx-auto">
+                <div class="d-flex">
+                    <div class="row g-0" style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);">
+
+                        <div class="col-2 col-md-4 col-lg-3 color-bg-surface settings-sidebar">
+                            <div class="settings-header">
+                                <a href="javascript:history.back()"  class="text-decoration-none " style="color: var(--color-text-primary)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                            
+                            <div class="settings-links">
+                                <ul class="mb-0 ps-0 ">
+                                    <li class="mt-4 mb-1">
+                                        <a href="{% url 'user-edit' request.user.username %}" class="setting-link d-flex align-items-center gap-2 active">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                                <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                                            </svg>
+                                            <span>General </span>
+                                        </a>
+                                    </li>
+                                    <li class="mb-1">
+                                        <a href="" class="setting-link d-flex align-items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                                                <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                                            </svg>
+                                            <span>Security</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="" class="setting-link d-flex align-items-center gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                            </svg>
+                                            <span>Account</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-10 col-md-8 col-lg-9  color-bg-main settings-main">
+                            <div>
+                                <h5 style="border-bottom: 1px solid var(--color-neutral);" class="pb-2 color-text-tertiary fw-normal">General</h5>
+                            </div>
+                            <form method="POST" enctype="multipart/form-data" class="">
+                                {% csrf_token %}
+
+                                <!-- Avatar Circle with Camera Icon -->
+                                <div class="text-center mb-4 position-relative d-inline-block">
+                                    <label for="id_avatar" style="cursor:pointer; position: relative;">
+                                        {% if user.avatar %}
+                                            <img src="{{ user.avatar.url }}" id="avatarPreview" class="rounded-circle" width="120" height="120" style="object-fit: cover;" alt="avatar">
+                                        {% else %}
+                                            <img src="{% static 'images/profile.svg' %}" id="avatarPreview" class="rounded-circle" width="120" height="120" style="object-fit: cover;" alt="avatar">
+                                        {% endif %}
+
+                                        <div class="camera-overlay">
+                                            <i class="fa fa-camera text-white"></i>
+                                        </div>
+                                    </label>
+                                    {{ form.avatar }}
+                                    <input type="hidden" name="remove_avatar" id="removeAvatarInput" value="false">
+
+                                    <!-- Remove Photo Button -->
+                                    <div class="mt-2">
+                                        <button type="button" class="btn btn-sm" id="removePhotoBtn">Remove Photo</button>
+                                    </div>
+                                </div>
+
+                                <!-- Other Fields -->
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    {{ form.name }}
+
+                                    {% for error in form.name.errors %}
+                                        <div class="text-white-50 small mt-1 fst-italic error-msg">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Username</label>
+                                    {{ form.username }}
+
+                                    {% for error in form.username.errors %}
+                                        <div class="text-white-50 small mt-1 fst-italic error-msg">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor%}
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Bio</label>
+                                    {{ form.bio }}
+
+                                    {% for error in form.bio.errors %}
+                                        <div class="text-white-50 small mt-1 fst-italic error-msg">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="mb-3 d-flex align-items-center gap-2">
+                                    <label class="form-label mb-0">Active Now</label>
+                                    <label class="switch mb-0">
+                                        <input type="checkbox" name="is_online" id="id_is_online" {% if user.is_online %}checked{% endif %}>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn w-100 mt-2 update-btn">Update Profile</button>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+<!-- JS -->
+<script>
+const avatarInput = document.getElementById("id_avatar");
+const avatarPreview = document.getElementById("avatarPreview");
+const removeBtn = document.getElementById("removePhotoBtn");
+const defaultAvatar = "{% static 'images/profile.svg' %}";
+
+// Preview selected image
+avatarInput.addEventListener("change", function() {
+    const file = this.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = function(e){
+            avatarPreview.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+// Remove photo and reset to default
+removeBtn.addEventListener("click", function(){
+    avatarInput.value = "";
+    avatarPreview.src = defaultAvatar;
+    document.getElementById("removeAvatarInput").value = "true";
+});
+</script>
+
+{% endblock %}
