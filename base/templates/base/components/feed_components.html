@@ -129,9 +129,9 @@
                         <div class="small d-flex align-items-center ">
 
                             <div class="" style="position: relative; display: inline-block; width: 35x; height: 35px;">
-                                {% if request.user.avatar and request.user.avatar.name != "profile.svg" %}
+                                {% if room.host.avatar and room.host.avatar.name != "profile.svg" %}
                                     <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
-                                        <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="35" height="35" style="object-fit: cover;" alt="{{ request.user.username }}" >
+                                        <img src="{{ room.host.avatar.url }}" class="rounded-circle" width="35" height="35" style="object-fit: cover;" alt="{{ room.host.username }}" >
                                     </div>
                                 {% else %}
                                     <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="35" height="35" alt="Default avatar">

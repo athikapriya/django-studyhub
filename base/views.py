@@ -300,7 +300,7 @@ def deleteMessage(request, pk):
     if next_url:
         return redirect(next_url)
 
-    return redirect('home')
+    return redirect('homepage')
 
 # =============== delete message view ends =============== 
 # ============================== Message views ends here ============================== 

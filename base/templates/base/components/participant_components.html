@@ -27,9 +27,9 @@
                 <!-- =============== participant image starts =============== -->
                 <div style="max-width: 43px;">
                     <div class="" style="position: relative; display: inline-block; width: 40x; height: 40px;">
-                        {% if request.user.avatar and request.user.avatar.name != "profile.svg" %}
+                        {% if user.avatar %}
                             <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
-                                <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;" alt="{{request.user.username}}">
+                                <img src="{{ user.avatar.url }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;" alt="{{user.username}}">
                             </div>
                         {% else %}
                             <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="40" height="40" alt="Default avatar">
