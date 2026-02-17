@@ -36,7 +36,7 @@
     <div class="card-header d-flex justify-content-between align-items-center gap-2 color-text-primary color-bg-surface">
         <!-- =============== header left side : back btn and header starts =============== -->
         <div class="d-flex align-items-center gap-2 text-uppercase ">
-            <a href="{% url 'homepage' %}" class="text-decoration-none d-flex align-items-center justify-content-center">
+            <a href="javascript:history.back()" class="text-decoration-none d-flex align-items-center justify-content-center">
             <svg xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 640 640"
             width="18"
@@ -129,7 +129,7 @@
                     <!-- =============== host avatar ends =============== -->
                     
                     <!-- =============== host username =============== -->
-                    <a href="{% url 'user-profile' room.host.username %}" class="text-decoration-none color-primary ms-2 room-host__username"><i>@</i>{{room.host.username|slice:":10"}}</a>
+                    <a href="{% url 'user-profile' room.host.username %}" class="text-decoration-none color-primary ms-2 room-host__username"><i>@</i>{{room.host.username}}</a>
 
                 </div>
 
