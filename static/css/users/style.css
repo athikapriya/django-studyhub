@@ -97,7 +97,7 @@ nav{
     height: 11px;
     width: 11px;
     left: 3px;  
-    bottom: 2px;
+    bottom: 1.5px;
     background-color: #fff;
     transition: 0.4s;
     border-radius: 50%;
@@ -196,4 +196,40 @@ input:checked + .slider {
     .setting-link.active {
         background: rgba(87, 187, 221, 0.15);
     }
+}
+
+
+/* form */
+.account-settings .form-label{
+    margin-bottom: 2px;
+    font-size: 0.85rem;
+}
+
+.form-input-custom{
+    font-size: 0.85rem;
+}
+
+.form-input-custom::placeholder {
+    font-size: 0.85rem;
+}
+
+
+/* for alignment and scroller */
+.account-settings {
+    min-height: 100vh;  
+    padding: 20px;
+}
+
+.settings-card {
+    width: 100%;
+    max-width: 850px; 
+    max-height: 85vh; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+    border-radius: 8px;
+    overflow: hidden;   
+}
+
+.settings-main {
+    overflow-y: auto;
+    max-height: 85vh;
 }
