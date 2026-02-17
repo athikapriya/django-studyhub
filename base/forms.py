@@ -2,7 +2,7 @@
 from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
 # local app imports 
 from .models import Room, User
@@ -130,3 +130,30 @@ class RoomForm(ModelForm):
         if description and len(description.split()) > 200:
             raise ValidationError("Try summarizing your thoughts — 200 words max, please.")
         return description
+    
+
+
+# =============== Change password form =============== 
+class CustomPasswordChangeForm(PasswordChangeForm):
+    
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(user, *args, **kwargs)
+
+        self.fields['old_password'].label = "Current Password"
+        self.fields['new_password1'].label = "New Password"
+        self.fields['new_password2'].label = "Confirm New Password"
+
+        self.fields['old_password'].widget.attrs.update({
+            "class": "form-control form-control-sm form-input-custom",
+            "placeholder": "Enter current password"
+        })
+
+        self.fields['new_password1'].widget.attrs.update({
+            "class": "form-control form-control-sm form-input-custom",
+            "placeholder": "Enter new password"
+        })
+
+        self.fields['new_password2'].widget.attrs.update({
+            "class": "form-control form-control-sm form-input-custom",
+            "placeholder": "Confirm new password"
+        })

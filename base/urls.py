@@ -37,4 +37,7 @@ urlpatterns = [
     # =============== Activities + Notifications =============== 
     path("<str:username>/activity/", views.user_activity, name="activity"),
     path("<str:username>/notification/", views.user_notifications, name="notification"),
+
+    # =============== Change password =============== 
+    path("settings/change-password/", views.change_password, name="change-password"),
 ]

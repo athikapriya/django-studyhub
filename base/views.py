@@ -4,11 +4,12 @@ from django.db.models import Q, Count, F
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 
 
 # local app imports
 from .models import *
-from .forms import RoomForm, CreateUserForm, EditUserForm
+from .forms import RoomForm, CreateUserForm, EditUserForm, CustomPasswordChangeForm
 
 
 # ============================== AUTH views starts here ============================== 
@@ -430,3 +431,27 @@ def user_notifications(request, username):
 
     return render(request, "base/user_notifications.html", context)
 # ============================== notofication view ends here ============================== 
+
+
+# ============================== change password view starts here ============================== 
+@login_required(login_url="login")
+def change_password(request):
+
+    if request.method == "POST":
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated.')
+            return redirect("user-profile", username=request.user.username)
+        else:
+            messages.error(request, "Please correct the error below.")
+    else:
+        form = CustomPasswordChangeForm(request.user)
+
+    context = {
+        "form": form
+    }
+
+    return render(request, 'users/change_password.html', context)
+# ============================== change password view starts here ============================== 
