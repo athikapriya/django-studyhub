@@ -25,7 +25,7 @@ class User(AbstractUser):
     avatar = models.ImageField(null=True, blank=True, upload_to="avatar/",  default="profile.svg")
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["username"]
 
 
 
