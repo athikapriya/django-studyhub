@@ -85,6 +85,20 @@
         font-size: 0.9rem;
     }
 
+    .join-tab{
+        font-size: 0.85rem;
+        border: 2px solid var(--color-btn-secondary);
+        display: inline-block;
+        padding: 3px 12px;
+        transition: var(--transition);
+        color: var(--color-primary);
+    }
+
+    .join-tab:hover{
+        background-color: var(--color-btn-secondary);
+        color: var(--color-btn-primary);
+    }
+
     @media screen and (max-width: 768px) {
         .feed-components .small-screen-header{
             display: block;
@@ -200,8 +214,25 @@
 
                     
                     <!-- room name -->
-                    <div class=" room-name__container pb-2">
-                        <a href="{% url 'room' room.slug %}" class="text-decoration-none room-name">{{room.name}}</a>
+                    <div class=" room-name__container pb-2 d-flex align-items-center justify-content-between">
+                        <a href="{% url 'room' room.slug %}" class="text-decoration-none room-name mb-0 pb-0">{{room.name}}</a>
+
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'room' room.slug %}" class="d-flex align-items-center justify-content-center join-tab rounded-5 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+                            </svg>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="d-flex align-items-center justify-content-center join-tab rounded-5 ">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+
                     </div>
 
                     <div class="d-flex align-items-center gap-2 mt-2 participants-avatar">

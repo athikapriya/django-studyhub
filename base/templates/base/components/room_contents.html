@@ -109,7 +109,7 @@
             
             <p class="color-text-secondary fw-semibold mb-1 pb-0 hosted-by">Hosted by</p>
 
-            <div class="mt-2 d-flex justify-content-between">
+            <div class="mt-2">
                 <div class="d-flex align-items-center">
                     <!-- =============== host avatar starts =============== -->
                     <div class="" style="position: relative; display: inline-block; width: 35x; height: 35px;">
@@ -132,7 +132,10 @@
                     <a href="{% url 'user-profile' room.host.username %}" class="text-decoration-none color-primary ms-2 room-host__username"><i>@</i>{{room.host.username}}</a>
 
                 </div>
+            </div>
 
+            <div class="room-description mt-2">
+                <p class="color-text-tertiary lh-base" style="font-size: 0.9rem;">{{room.description}}</p>
             </div>
             
             <!-- =============== chatsection starts here =============== -->
@@ -145,7 +148,7 @@
 
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <input type="text" name="body" placeholder="Write your message here..." class="form-control form-input-custom ">
+                    <input type="text" name="body" placeholder="Write your message to join room..." class="form-control form-input-custom ">
 
                     <button type="submit" class="send-btn">
                         <!-- Right arrow icon -->
