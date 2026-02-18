@@ -46,6 +46,7 @@
         <div class="row my-5">
             <div class="col-10 col-sm-8 col-md-7 col-lg-6 col-xl-5 mx-auto">
 
+                {% if user_activity %}
                 <div class="card text-bg-secondary" >
                     <div class="card-header d-flex align-items-center gap-2 text-uppercase color-text-primary color-bg-surface">
                         <a href="javascript:history.back()" class="text-decoration-none d-flex align-items-center justify-content-center">
@@ -122,6 +123,14 @@
                         {% endfor %}
                     </div>
                 </div>
+
+                {% else %}
+                    <div class="card" style="border-top-left-radius: 8px; border-top-right-radius: 8px;">
+                        <div class="card-body color-bg-main" style="border-top-left-radius: 6px; border-top-right-radius: 6px;">
+                            <p class="text-center text-white pb-0 mb-0">You don't have any activity yet!</p>
+                        </div>
+                    </div>
+                {% endif %}
 
             </div>
         </div>
