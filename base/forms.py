@@ -2,7 +2,8 @@
 from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, SetPasswordForm
+from django.contrib.auth.forms import SetPasswordForm
 
 # local app imports 
 from .models import Room, User
@@ -157,3 +158,21 @@ class CustomPasswordChangeForm(PasswordChangeForm):
             "class": "form-control form-control-sm form-input-custom",
             "placeholder": "Confirm new password"
         })
+
+
+
+# =============== for ResetPasswordform =============== 
+class CustomSetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            "class": "form-control form-input-custom",
+            "placeholder": "Enter new password"
+        })
+    )
+
+    new_password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            "class": "form-control form-input-custom",
+            "placeholder": "Confirm new password"
+        })
+    )
