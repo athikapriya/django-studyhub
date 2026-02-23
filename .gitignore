@@ -30,8 +30,6 @@ media/
 logs/
 *.log
 
-# Ignore Django secret settings
-studyhub/settings.py
 
 # OS files
 .DS_Store
