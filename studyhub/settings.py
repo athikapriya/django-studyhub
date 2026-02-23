@@ -144,4 +144,7 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
 CORS_ALLOW_ALL_ORIGINS = True
