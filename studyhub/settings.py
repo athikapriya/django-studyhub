@@ -14,7 +14,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 
 # Allowed hosts
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1').split(',')
+ALLOWED_HOSTS = [host.strip() for host in config('ALLOWED_HOSTS', default='127.0.0.1').split(',')]
 
 
 # Application definition
