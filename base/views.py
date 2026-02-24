@@ -99,7 +99,10 @@ def homepage(request):
     ).select_related('host').prefetch_related('participants').order_by("-updated")
 
     for room in rooms:
-        uploaded_participants = [p for p in room.participants.exclude(id=room.host.id)  if p.avatar and p.avatar.name != "profile.svg"]
+        uploaded_participants = [
+            p for p in room.participants.exclude(id=room.host.id)
+            if p.avatar and p.avatar.public_id != "profile"
+        ]
         room.display_participants = uploaded_participants[:7]
         room.extra_participants = len(uploaded_participants) - len(room.display_participants)
 
@@ -337,7 +340,10 @@ def userProfile(request, username):
     ).distinct()
 
     for room in rooms:
-        uploaded_participants = [p for p in room.participants.exclude(id=room.host.id) if p.avatar and p.avatar.name != "profile.svg"]
+        uploaded_participants = [
+            p for p in room.participants.exclude(id=room.host.id)
+            if p.avatar and p.avatar.public_id != "profile"
+        ]
         room.display_participants = uploaded_participants[:7]
         room.extra_participants = len(uploaded_participants) - len(room.display_participants)
 
@@ -367,11 +373,15 @@ def user_edit(request, username):
         form = EditUserForm(request.POST, request.FILES, instance=user)
 
         if form.is_valid():
+            remove_avatar = request.POST.get("remove_avatar") == "true"
 
-            if request.POST.get("remove_avatar") == "true":
-                if user.avatar:
-                    user.avatar.delete(save=False)
+            old_avatar = None
+            if user.avatar and hasattr(user.avatar, 'url'):
+                old_avatar = user.avatar
+
+            if remove_avatar:
                 user.avatar = None
+                user.save()
 
             form.save()
             return redirect("user-profile", username=user.username)

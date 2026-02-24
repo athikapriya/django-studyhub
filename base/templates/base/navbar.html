@@ -113,18 +113,18 @@ nav .dropdown-menu {
 
                     <!-- Profile Image -->
                     <div class="me-2" style="position: relative; display: inline-block;">
-                        {% if request.user.avatar and request.user.avatar.name != "profile.svg" %}
+                        {% if request.user.avatar %}
                             <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
                                 <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;" alt="{{ request.user.username }}">
                             </div>
                         {% else %}
-                            <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="40" height="40" alt="Default avatar">
+                            <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
+                                <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="40" height="40" alt="Default avatar">
+                            </div>
                         {% endif %}
 
-                        <!-- active dot starts -->
-                        <span style=" position: absolute; bottom: 2px; right: 1px; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; background-color: {% if request.user.is_online %}#28a745{% else %}#6c757d{% endif %};">
-                        </span>
-                        <!-- active dot ends -->
+                        <!-- Active dot -->
+                        <span style="position: absolute; bottom: 2px; right: 1px; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; background-color: {% if request.user.is_online %}#28a745{% else %}#6c757d{% endif %};"></span>
                     </div>
 
                     <!-- Name + Username -->
