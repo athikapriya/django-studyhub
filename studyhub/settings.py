@@ -36,6 +36,7 @@ AUTH_USER_MODEL = "base.User"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     "corsheaders.middleware.CorsMiddleware", # corsheaders
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,12 +69,20 @@ WSGI_APPLICATION = 'studyhub.wsgi.application'
 
 
 # =============== databases =============== 
+ENV = os.getenv("ENV", "development")
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
+if ENV == "production":
+    import dj_database_url
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 
 # =============== Http securing =============== 
@@ -144,3 +153,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
