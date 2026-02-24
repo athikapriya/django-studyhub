@@ -49,15 +49,15 @@ urlpatterns = [
     path("message/delete/<int:pk>/", views.deleteMessage, name="delete-message"),
 
     # =============== User Profile =============== 
-    path("<str:username>/", views.userProfile, name="user-profile"),
+    path("profile/<str:username>/", views.userProfile, name="user-profile"),
 
     # =============== Profile edit =============== 
-    path("<str:username>/settings/update-profile/", views.user_edit, name="user-edit"),
+    path("profile/<str:username>/settings/update-profile/", views.user_edit, name="user-edit"),
 
     # =============== Activities + Notifications =============== 
-    path("<str:username>/activity/", views.user_activity, name="activity"),
-    path("<str:username>/notification/", views.user_notifications, name="notification"),
+    path("profile/<str:username>/activity/", views.user_activity, name="activity"),
+    path("profile/<str:username>/notification/", views.user_notifications, name="notification"),
 
     # =============== Change password =============== 
-    path("settings/change-password/", views.change_password, name="change-password"),
+    path("profile/settings/change-password/", views.change_password, name="change-password"),
 ]
