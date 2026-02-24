@@ -3,8 +3,30 @@ import os
 from decouple import config
 import dj_database_url
 
+from dotenv import load_dotenv
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
+import cloudinary
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
+}
+
+# Set as default file storage
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# global config for Cloudinary
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET'),
+)
+
 
 # =============== secret key =============== 
 SECRET_KEY = config('SECRET_KEY')
@@ -29,6 +51,9 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     "rest_framework",
     "corsheaders",
+
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 AUTH_USER_MODEL = "base.User"
@@ -144,10 +169,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
-MEDIA_URL = '/images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
-
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
