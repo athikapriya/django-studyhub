@@ -32,8 +32,13 @@ h2{
     border: 1px solid var(--color-btn-secondary);
 }
 
-.btn-container{
+#register-page .btn-container{
     margin: 1.25rem 0rem ;
+    margin-bottom: 0.75rem;
+}
+
+#login-page .btn-container{
+    margin: 0rem;
     margin-bottom: 0.75rem;
 }
 
