@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
 from django.core.validators import RegexValidator
+from cloudinary.models import CloudinaryField
 
 
 
@@ -22,7 +23,7 @@ class User(AbstractUser):
 
     is_online = models.BooleanField(default=True)
 
-    avatar = models.ImageField(null=True, blank=True, upload_to="avatar/",  default="profile.svg")
+    avatar = CloudinaryField('image', default='profile', blank=True, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
