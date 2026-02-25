@@ -12,8 +12,8 @@ class User(AbstractUser):
         regex=r'^[a-zA-Z0-9_]+$',
         message='Username can only contain letters, numbers, and underscore.'
     )
-    username = models.CharField( max_length=150, unique=True, validators=[username_validator])
-    name = models.CharField(max_length=200, null=True)
+    username = models.CharField( max_length=15, unique=True, validators=[username_validator])
+    name = models.CharField(max_length=100, null=True)
     email = models.EmailField(unique=True, null=True)
     bio = models.TextField(null=True)
 
