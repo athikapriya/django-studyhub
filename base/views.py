@@ -128,7 +128,7 @@ def homepage(request):
 
     # top hosts
     top_hosts = User.objects.annotate(
-        rooms_count=Count('room')
+        rooms_count=Count('room', distinct=True)
     ).order_by('-rooms_count')[:3]
 
     context = {
