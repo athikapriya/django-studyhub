@@ -116,7 +116,7 @@ def homepage(request):
     if request.user.is_authenticated:
         user_activity = Message.objects.filter(
             user=request.user
-        ).select_related("room").order_by("-created_at")[:5]
+        ).select_related("room").order_by("-created_at")[:3]
     else:
         user_activity = Message.objects.none()
 
@@ -129,7 +129,7 @@ def homepage(request):
     # top hosts
     top_hosts = User.objects.annotate(
         rooms_count=Count('room', distinct=True)
-    ).order_by('-rooms_count')[:3]
+    ).order_by('-rooms_count')[:5]
 
     context = {
         "rooms" : rooms,
