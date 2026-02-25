@@ -61,10 +61,15 @@
         .small-screen-header{
             display: block;
         }
-        
-        .left-sidebar, .right-sidebar {
+    }
+
+    
+
+    @media (min-width: 768px) {
+
+        .left-sidebar, .right-sidebar, .main-content {
             position: sticky;
-            top: 110px;
+            top: 70px;
             height: calc(100vh - 120px);
             overflow-y: auto;
 
@@ -76,8 +81,8 @@
         .left-sidebar::-webkit-scrollbar, .right-sidebar::-webkit-scrollbar {
             display: none;
         }
-    }
 
+    }
 
 </style>
 
@@ -99,7 +104,7 @@
 
 
         <!-- ========== feed components starts here ========== -->
-        <section class="col-md-8 col-lg-6 g-4"> 
+        <section class="col-md-8 col-lg-6 g-4 main-content"> 
 
             <!-- =============== Mobile view: Feed with tabs for Topics and Activity starts =============== -->
             <div class="small-screen-header">
