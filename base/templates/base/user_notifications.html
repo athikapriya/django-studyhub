@@ -72,9 +72,9 @@
                                 <div class="col-12">
                                     <div class="d-flex gap-2">
                                         <div class="" style="position: relative; display: inline-block; width: 40px; height: 40px;">
-                                            {% if request.user.avatar and request.user.avatar.name != "profile.svg" %}
+                                            {% if message.user.avatar and request.user.avatar.name != "profile.svg" %}
                                                 <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
-                                                    <img src="{{ request.user.avatar.url }}" class="rounded-circle" width="100%" height="40" style="object-fit: cover;" alt="{{request.user.username}}">
+                                                    <img src="{{ message.user.avatar.url }}" class="rounded-circle" width="100%" height="40" style="object-fit: cover;" alt="{{message.user.username}}">
                                                 </div>
                                             {% else %}
                                                 <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="40" height="40" alt="Default avatar">
@@ -87,7 +87,7 @@
                                         </div>
 
                                         <div class="message-user">
-                                            <a href="{% url 'user-profile' message.user.username %}" class="text-decoration-none color-primary ">@{{message.user.username|truncatechars:10}}</a>
+                                            <a href="{% url 'user-profile' message.user.username %}" class="text-decoration-none color-primary ">@{{message.user.username}}</a>
                                             <span class="d-block color-text-secondary message-user__time">{{message.created_at|timesince}} ago</span>
                                             <span class=" color-text-tertiary">replied to post</span>
                                             <a href="{% url 'room' message.room.slug %}" class="d-block color-primary mt-1 text-decoration-none">" {{message.room}} "</a>
