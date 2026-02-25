@@ -62,7 +62,7 @@
                         {% endif %}
 
                         <!-- active dot starts -->
-                        <span style=" position: absolute; bottom: 0px; right: 2px; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; background-color: {% if request.user.is_online %}#28a745{% else %}#6c757d{% endif %};">
+                        <span style=" position: absolute; bottom: 0px; right: 2px; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; background-color: {% if message.user.is_online %}#28a745{% else %}#6c757d{% endif %};">
                         </span>
                         <!-- active dot ends -->
                     </div>
