@@ -44,6 +44,9 @@ urlpatterns = [
     # =============== Topics ===============
     path("topics/", views.browseTopics, name="browse-topics"),
 
+    # =============== Hosts =============== 
+    path("hosts/", views.browseHosts, name="browse-hosts"),
+
     # =============== Messages =============== 
     path('message/update/<int:pk>/', views.updateMessage, name='update-message'),
     path("message/delete/<int:pk>/", views.deleteMessage, name="delete-message"),

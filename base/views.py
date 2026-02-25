@@ -281,6 +281,20 @@ def browseTopics(request):
 # ============================== browse topics view ends ============================== 
 
 
+# ============================== top hosts view starts ============================== 
+def browseHosts(request):
+
+    hosts = User.objects.annotate(
+        rooms_count=Count('room')
+    ).filter(rooms_count__gt=0).order_by('-rooms_count') 
+
+    context = {
+        "hosts": hosts
+    }
+    return render(request, 'base/browse_hosts.html', context)
+# ============================== top hosts view ends ============================== 
+
+
 
 # ============================== Message views starts here ============================== 
 # =============== update message view strts =============== 

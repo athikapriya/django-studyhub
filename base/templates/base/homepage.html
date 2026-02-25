@@ -108,8 +108,8 @@
                 <div class="d-flex align-items-center justify-content-center gap-3 my-4 tabs">
                     <a href="{% url 'browse-topics' %}" class="text-decoration-none color-primary fw-semibold rounded-5">Browse Topics</a>
                     {% if user.is_authenticated %}
-                        <a href="{% url 'activity' request.user.username %}" class="text-decoration-none color-primary fw-semibold rounded-5">
-                            Recent Activity
+                        <a href="{% url 'browse-hosts' %}" class="text-decoration-none color-primary fw-semibold rounded-5">
+                            Browse Hosts
                         </a>
                     {% endif %}
                 </div>
