@@ -89,6 +89,7 @@ def homepage(request):
     page= "homepage"
 
     q = request.GET.get('q') or ""
+    host_username = request.GET.get('host')
 
     rooms = Room.objects.filter(
         Q(topic__name__icontains=q) |
@@ -97,6 +98,9 @@ def homepage(request):
     ).annotate(
         participant_count=Count("participants", distinct=True)
     ).select_related('host').prefetch_related('participants').order_by("-updated")
+
+    if host_username:
+        rooms = rooms.filter(host__username=host_username)
 
     for room in rooms:
         uploaded_participants = [
@@ -121,13 +125,20 @@ def homepage(request):
     )[:7]
     
     topic_count = Topic.objects.count()
+
+    # top hosts
+    top_hosts = User.objects.annotate(
+        rooms_count=Count('room')
+    ).order_by('-rooms_count')[:3]
+
     context = {
         "rooms" : rooms,
         "room_count" : room_count,
         "topics" : topics,
         "topic_count" : topic_count,
         "page" : page,
-        "user_activity": user_activity
+        "user_activity": user_activity,
+        "top_hosts": top_hosts
     }
     return render(request, 'base/homepage.html', context)
 # ============================== homepage view ends here ============================== 

@@ -1,0 +1,70 @@
+{% load static %}
+
+{% block css %}
+<style>
+    .host-container{
+        margin-bottom: 1.5rem;
+    }
+
+    .host-container:last-child{
+        margin-bottom: 0;
+    }
+
+    .follow-btn a{
+        transition: var(--transition);
+    }
+
+    .follow-btn:hover a{
+        color: var(--color-primary);
+    }
+</style>
+{% endblock %}
+
+<!-- =============== top hosts section starts here =============== -->
+{% if user_activity %}
+<section id="host-components" class="mb-4">
+    <div class="card text-bg-secondary" >
+        <div class="card-header text-uppercase color-text-primary color-bg-surface">
+            Top Hosts
+        </div>
+        <div class="card-body color-bg-main " style="padding-top: 1.3rem; padding-bottom: 1.3rem;">
+            
+            {% for host in top_hosts %}
+            <div class="d-flex justify-content-between host-container gap-1 gap-xl-3">
+
+                <!-- =============== host avatar and name =============== -->
+                <div class="d-flex gap-1 gap-xl-3 align-items-center">
+                    <!-- avatar -->
+                    <div class="host-avatar">
+                        <a href="{% url 'user-profile' host.username %}" class="" style="position: relative; display: inline-block; width: 43x; height: 43px;">
+                            {% if host.avatar%}
+                                <div style="border: 2px solid var(--color-primary); border-radius: 50%;">
+                                    <img src="{{ host.avatar.url }}" class="rounded-circle" width="40" height="40" style="object-fit: cover;" alt="{{ host.username }}">
+                                </div>
+                            {% else %}
+                                <img src="{% static 'images/profile.svg' %}" class="rounded-circle" width="40" height="40" alt="Default avatar">
+                            {% endif %}
+
+                            <!-- active dot starts -->
+                            <span style=" position: absolute; bottom: 0px; right: 2px; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; background-color: {% if host.is_online %}#28a745{% else %}#6c757d{% endif %};">
+                            </span>
+                            <!-- active dot ends -->
+                        </a>
+                    </div>
+                    <!-- name -->
+                    <h6 class="mb-0 fw-bold color-text-primary" style="font-size: 0.9rem;">{{host.name|slice:8}}</h6>
+                </div>
+                
+                <!-- host follow btn -->
+                <div class="d-flex align-items-center follow-btn">
+                    <a href="{% url 'homepage' %}?host={{host.username}}" class="text-decoration-none color-text-tertiary color-bg-surface rounded-1 fw-semibold" style="font-size: 0.85rem; padding: 0.3rem 0.4rem;">Follow</a>
+                </div>
+                
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{%  endif %}
+<!-- =============== top hosts section ends here =============== -->
