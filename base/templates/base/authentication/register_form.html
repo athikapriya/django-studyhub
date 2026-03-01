@@ -9,8 +9,8 @@
 
 <!-- =============== register section starts =============== -->
 
-<section id="register-page" class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="container my-5">
+<section id="register-page" class="">
+    <div class="container">
         <div class="row">
             <div class="px-4 px-sm-0  col-sm-10 col-md-9 col-lg-7 col-xl-6 mx-auto">
                 <div class="card">
@@ -83,9 +83,9 @@
                                         </span>
 
                                         {% if form.password1.errors %}
-                                            <div class="text-white-50 small mt-1 fst-italic error-msg">
-                                                {{ form.password1.errors.0 }}
-                                            </div>
+                                            {% for error in form.password1.errors %}
+                                                <div class="text-white-50 small mt-1 fst-italic error-msg">{{ error }}</div>
+                                            {% endfor %}
                                         {% endif %}
                                     </div>
                                     <!-- =============== password2 field =============== -->
@@ -95,24 +95,16 @@
                                         <span class="toggle-password">
                                             <i class="fa-solid fa-eye"></i>
                                         </span>
-                                        {% if form.password1.errors %}
-                                            <div class="text-white-50 small mt-1 fst-italic error-msg">
-                                                {{ form.password1.errors.0 }}
-                                            </div>
+                                        
+                                        {% if form.password2.errors %}
+                                            {% for error in form.password2.errors %}
+                                                <div class="text-white-50 small mt-1 fst-italic error-msg">{{ error }}</div>
+                                            {% endfor %}
                                         {% endif %}
                                     </div>
                                 </div>
                                 <!-- =============== row for password1 and password2 ends =============== -->
 
-                                <!-- =============== error messages starts =============== -->
-                                <!-- <div class="text-center error-msg">
-                                    {% for message in messages %}
-                                        <p class="mb-2 text-center color-text-primary">{{message}}</p>
-                                    {% endfor %}
-                                </div> -->
-                                <!-- =============== error messages ends =============== -->
-
-                                
                                 <!-- =============== register btn =============== -->
                                 <div class="btn-container">
                                     <button type="submit" class="my-btn d-flex justify-content-center align-items-center gap-2 fw-normal">
@@ -125,6 +117,13 @@
                                 
                         </form>
                         <!-- =============== form =============== -->
+
+
+                        {% if form.non_field_errors %}
+                            <div class="text-white-50 small mt-1 fst-italic error-msg">
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
 
 
                         <!-- =============== for signup =============== -->
