@@ -3,7 +3,7 @@ from django.forms import ModelForm
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, SetPasswordForm
-from django.contrib.auth.forms import SetPasswordForm
+
 
 # local app imports 
 from .models import Room, User
