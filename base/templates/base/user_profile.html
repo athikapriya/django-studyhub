@@ -74,6 +74,25 @@
             display: none;
         }
     }
+
+    @media (min-width: 768px) {
+
+        .left-sidebar, .right-sidebar, .main-content {
+            position: sticky;
+            top: 70px;
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+
+            scrollbar-width: none;
+
+            -ms-overflow-style: none;
+        }
+
+        .left-sidebar::-webkit-scrollbar, .right-sidebar::-webkit-scrollbar {
+            display: none;
+        }
+
+    }
 </style>
 
 {% endblock %}
@@ -84,7 +103,7 @@
 
 
         <!-- =============== topic components starts here =============== -->
-        <aside class="col-md-4 col-lg-3 g-4 topic-section">
+        <aside class="col-md-4 col-lg-3 g-4 topic-section left-sidebar">
             {% include 'base/components/topic_components.html' %}
         </aside>
         <!-- =============== topic components ends here =============== -->
@@ -92,7 +111,7 @@
 
 
         <!-- =============== profile contents starts here =============== -->
-        <section class="col-md-8 col-lg-6 g-4">
+        <section class="col-md-8 col-lg-6 g-4 main-content">
             
             <!-- =============== host profile section starts =============== -->
             <div class="host-profile">
@@ -152,7 +171,7 @@
 
 
         <!-- =============== notification components starts here =============== -->
-        <aside class="col-lg-3 g-4 activity-section">
+        <aside class="col-lg-3 g-4 activity-section right-sidebar">
             {% include 'base/components/activity_components.html' %}
         </aside>
         <!-- =============== notification components ends here =============== -->
