@@ -31,6 +31,7 @@ This project was built to practice full-stack Django development, REST API desig
 
 ### Demo & Repository
 **Live Demo** : [studyhub live](https://django-studyhub.onrender.com/)    ![Deploy Status](https://img.shields.io/badge/Render-live-brightgreen)
+
 **Source Code** : [Github Repository](https://github.com/athikapriya/django-studyhub) ![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github&logoColor=white)
 
 
