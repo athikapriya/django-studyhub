@@ -30,18 +30,18 @@ This project was built to practice full-stack Django development, REST API desig
 
 
 ### Demo & Repository
-**Live Demo** : [studyhub live](https://django-studyhub.onrender.com/)   
-![Deploy Status](https://img.shields.io/badge/Render-live-brightgreen)
-**Source Code** : [Github Repository](https://github.com/athikapriya/django-studyhub)
- ![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github&logoColor=white)
+**Live Demo** : [studyhub live](https://django-studyhub.onrender.com/)    ![Deploy Status](https://img.shields.io/badge/Render-live-brightgreen)
+**Source Code** : [Github Repository](https://github.com/athikapriya/django-studyhub) ![GitHub](https://img.shields.io/badge/github-repo-blue?logo=github&logoColor=white)
 
 
 
 ### Preview
-**Homepage**
+#### Homepage
+
 ![Homepage](screenshots/homepage.png)
 
-**Room Management**
+#### Room Management
+
 ![room](screenshots/room.png)
 
 ### Usage
@@ -104,7 +104,9 @@ Contributions are welcome! Please open an issue or submit a pull request.
 **Athika Chowdhury Priya** - Python & Django Developer
 
 Github : [athikapriya](https://github.com/athikapriya)
+
 Portfolio : [athikapriya.netlify.app](https://athikadev.netlify.app/)
+
 Email : [athikapriya1997@gmail.com](mailto:athikapriya1997@gmail.com)
 
 ### License
