@@ -1,7 +1,6 @@
 from pathlib import Path
 import os
 from decouple import config
-import dj_database_url
 
 from dotenv import load_dotenv
 
@@ -94,28 +93,12 @@ WSGI_APPLICATION = 'studyhub.wsgi.application'
 
 
 # =============== databases =============== 
-ENV = os.getenv("ENV", "development")
-
-if ENV == "production":
-    import dj_database_url
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
-
-
-# =============== Http securing =============== 
-
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
+}
 
 # =============== password validator =============== 
 
